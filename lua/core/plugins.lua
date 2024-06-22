@@ -12,21 +12,20 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
+  require("plugins.telescope").config,
   require("plugins.colorscheme"),
   require("plugins.lualine"),
-  require("plugins.nvim-tree"),
   require("plugins.navigator"),
+  require("plugins.tabline"),
+  require("plugins.scrollbar"),
+  require("plugins.editor"),
+  require("plugins.nvim-tree"),
   require("plugins.treesitter"),
   require("plugins.autocomplete").config,
   require("plugins.debugger"),
   require("plugins.lspconfig").config,
-
-  "akinsho/bufferline.nvim",
-  "lewis6991/gitsigns.nvim",
-
-  {
-    'nvim-telescope/telescope.nvim',
-    tag = '0.1.1',
-    dependencies = { { 'nvim-lua/plenary.nvim' } }
-  },
+  require("plugins.go"),
+  require("plugins.notify"),
+  require("plugins.copilot"),
+  require("plugins.git"),
 }, {})

@@ -16,6 +16,3 @@ if not vim.loop.fs_stat(current_config_path) then
   end
 end
 require("config.machine_specific")
-
--- plugins
-require("plugins/telescope")
