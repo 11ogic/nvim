@@ -63,15 +63,6 @@ module.config = {
     "hrsh7th/cmp-nvim-lua",
     "hrsh7th/cmp-calc",
     {
-      "SirVer/ultisnips",
-      config = function()
-        -- Optional: Set any configurations for UltiSnips here
-        vim.g.UltiSnipsExpandTrigger = "<tab>"
-        vim.g.UltiSnipsJumpForwardTrigger = "<c-j>"
-        vim.g.UltiSnipsJumpBackwardTrigger = "<c-k>"
-      end,
-    },
-    {
       "onsails/lspkind.nvim",
       lazy = false,
       config = function()
@@ -143,7 +134,7 @@ module.configfunc = function()
       { name = "calc" },
     }),
     mapping = cmp.mapping.preset.insert({
-      ['<C-o>'] = cmp.mapping.complete(),
+      ['<C-l>'] = cmp.mapping.complete(),
       ["<C-e>"] = cmp.mapping(
         function()
           cmp_ultisnips_mappings.compose { "expand", "jump_forwards" } (function() end)

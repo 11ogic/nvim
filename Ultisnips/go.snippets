@@ -1,0 +1,106 @@
+snippet checke "Check Error"
+if err != nil {
+	return err
+}
+${0}
+endsnippet
+
+snippet no "utils.NoError"
+if utils.NoError(err) {
+	${0}
+}
+endsnippet
+
+snippet forr "For loop range"
+for _, ${1:thing} := range ${2:things} {
+	${3://TODO}
+}
+endsnippet
+
+snippet fori "For loop i"
+for i := 0; i < n; i++ {
+	${1://TODO}
+}
+endsnippet
+
+snippet re "Return Error if any"
+if err != nil {
+	return err
+}
+${0}
+endsnippet
+
+snippet iep "Panic if error"
+if err != nil {
+	panic(err)
+}
+${0}
+endsnippet
+
+snippet iel "Log if error"
+if err != nil {
+	log.Println(err)
+}
+${0}
+endsnippet
+
+snippet ier "Return if error"
+if err != nil {
+	return err
+}
+${0}
+endsnippet
+
+snippet st "Println"
+fmt.Println(${1})${0}
+endsnippet
+
+snippet lt "Log Println"
+log.Println(${1})${0}
+endsnippet
+
+snippet sf "Printf"
+fmt.Printf("${1}\n")${0}
+endsnippet
+
+snippet lf "Log Printf"
+log.Printf("${1}\n")${0}
+endsnippet
+
+snippet fn "Function"
+func ${1:function}() {
+	${0: // todo}
+}
+endsnippet
+
+snippet start "Starting code"
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+	fmt.Println("hello")
+}
+endsnippet
+
+snippet cq "Current Question"
+app.result.questions[app.curResultIndex]${0}
+endsnippet
+
+snippet fa "fix add type"
+// CAFIX
+endsnippet
+
+snippet gof "go func() {} ()"
+go func() {
+	${0}
+}()
+endsnippet
+
+snippet df "defer func() {} ()"
+defer func() {
+	${0}
+}()
+endsnippet

@@ -18,6 +18,7 @@ require("lazy").setup({
   require("plugins.navigator"),
   require("plugins.tabline"),
   require("plugins.scrollbar"),
+  require("plugins.snippets"),
   require("plugins.editor"),
   require("plugins.nvim-tree"),
   require("plugins.treesitter"),

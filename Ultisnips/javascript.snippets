@@ -1,0 +1,444 @@
+snippet st "console.log"
+console.log(${0});
+endsnippet
+
+snippet fl "Firebase Function Log"
+/*LOG*/ functions.logger.log(${0});
+endsnippet
+
+snippet f "Arrow Function"
+(${1:arg}) => {
+	${0}
+}
+endsnippet
+
+snippet fn "Empty Function"
+function ${1:functionName}() {
+	${0}
+}
+endsnippet
+
+snippet cf "Constant Function"
+const ${1:funcName} = () => {
+	${0}
+}
+endsnippet
+
+snippet ef "Export Function"
+export function ${1:functionName}() {
+	${0}
+}
+endsnippet
+
+snippet eaf "Export Async Function"
+export async function ${1:functionName}() {
+	${0}
+}
+endsnippet
+
+snippet eafa "Export Async Function With Args"
+const ${1}DefaultArgs = {
+	${2}
+};
+export async function ${1:functionName}(options = ${1}DefaultArgs) {
+	options = { ...${1}DefaultArgs, ...options };
+	${0:// todo}
+}
+endsnippet
+
+snippet ssr "NextJS ServerSide Rendering"
+export async function getServerSideProps() {
+	return {
+		props: {
+			//
+		},
+	};
+}
+endsnippet
+
+snippet ssg "NextJS ServerSide Generation"
+export async function getStaticProps() {
+	return {
+		props: {
+			//
+		},
+	};
+}
+endsnippet
+
+snippet rs "res.status"
+res.status(${1:200}).send("${2:text}")${0}
+endsnippet
+
+snippet af "Async Arrow Function"
+async (${1}) => {
+	${0}
+}
+endsnippet
+
+snippet afn "Async Function"
+async function ${1:FunctionName}() {
+	${0}
+}
+endsnippet
+
+snippet try "Try Catch"
+try {
+	//
+} catch (e) {
+	console.error(e);
+}
+endsnippet
+
+snippet eh "Error Handler"
+return await errorHandler(async () => {
+	${0:// Todo}
+});
+endsnippet
+
+snippet c "Comment Block"
+/*
+ * ${0}
+*/
+endsnippet
+
+snippet pm "@param"
+@param ${1:parameter}: ${0:description}
+endsnippet
+
+# React & JSX
+
+snippet t "Tag"
+<${1:div}>
+	${2}
+</${1}>
+${0}
+endsnippet
+
+snippet ta "Tag with Attributes"
+<${1:div} ${2:className=""}>
+	${3}
+</${1}>
+${0}
+endsnippet
+
+snippet ti "Tag Inline"
+<${1} />
+${0}
+endsnippet
+
+snippet br "<br />"
+<br />
+endsnippet
+
+
+snippet rrcc "React Redux Class Component" b
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import styles from './${2:$1}.css';
+
+class ${1:`!v expand('%:t:r')`} extends Component {
+	static propTypes = {
+		children: PropTypes.node,
+		className: PropTypes.string,
+		dispatch: PropTypes.func.isRequired,
+	};
+
+	constructor(props) {
+		super(props);
+	}
+
+	render() {
+		return (
+			<div className={styles.base}>
+				$3
+			</div>
+		);
+	}
+}
+
+function mapStateToProps(state) {
+	return {};
+}
+
+export default connect(mapStateToProps)($1);
+endsnippet
+
+snippet rcc "React Class Component" b
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import styles from './${2:$1}.css';
+
+class ${1:`!v expand('%:t:r')`} extends Component {
+	static propTypes = {
+		${2:children: PropTypes.node,
+		className: PropTypes.string,}
+	};
+
+	constructor(props) {
+		super(props);
+	}
+
+	render() {
+		return (
+			<${3:div} className={styles.base}>
+				$0
+			</$3>
+		);
+	}
+}
+
+export default $1;
+endsnippet
+
+snippet rfc "React Functional Component" b
+import React from 'react';
+import PropTypes from 'prop-types';
+import styles from './${2:$1}.css';
+
+function ${1:`!v expand('%:t:r')`}({ $3 }) {
+	return (
+		<${5:div} className={styles.base}>
+			$0
+		</$5>
+	);
+}
+
+$1.defaultProps = {$4};
+
+$1.propTypes = {`!p
+props = t[3]
+if props:
+  snip >> 1
+  for prop in props.split(', '):
+    snip += prop + ': PropTypes.any,'
+`
+};
+
+export default $1;
+endsnippet
+
+snippet rsc "React Styled Component" b
+import styled from 'styled-components';
+
+const ${1:`!v expand('%:t:r')`} = styled.${2:div}\`
+	$3
+\`;
+
+export default $1;
+endsnippet
+
+snippet rsci "React Styled Component Interpolation" b
+import styled, { css } from 'styled-components';
+
+const ${1:`!v expand('%:t:r')`} = styled.${2:div}\`${props => css\`
+	${3:${props.$4 && \`
+		$5
+	\`}}
+\`}\`;
+
+export default $1;
+endsnippet
+
+snippet pp "Get Props"
+${props => props.${1}};
+endsnippet
+
+snippet cn "className"
+className="$1"
+endsnippet
+
+snippet dp "Default Props" b
+${1:`!v expand('%:t:r')`.}defaultProps = {
+	$2
+};
+endsnippet
+
+snippet set "Set State"
+this.setState({
+	${1}: ${2}
+});
+endsnippet
+
+snippet props "Get Property" i
+this.props.${1}
+endsnippet
+
+snippet state "Get State" i
+this.state.${1}
+endsnippet
+
+snippet ref "Ref" i
+ref={${1:ref} => { this.${2:name} = $1; }}
+endsnippet
+
+
+# Component Lifecycle
+snippet cwm "Component Will Mount" b
+componentWillMount() {
+	$1
+}
+endsnippet
+
+snippet cdm "Component Did Mount" b
+componentDidMount() {
+	$1
+}
+endsnippet
+
+snippet cwrp "Component Will Receive Props" b
+componentWillReceiveProps(nextProps) {
+	$1
+}
+endsnippet
+
+snippet scup "Should Component Update" b
+shouldComponentUpdate(nextProps, nextState) {
+	$1
+}
+endsnippet
+
+snippet cwup "Component Will Update" b
+componentWillUpdate(nextProps, nextState) {
+	$1
+}
+endsnippet
+
+snippet cdup "Component Did Update" b
+componentDidUpdate(prevProps, prevState) {
+	$1
+}
+endsnippet
+
+snippet cwu "Component Will Unmount" b
+componentWillUnmount() {
+	$1
+}
+endsnippet
+
+snippet ren "Render"
+render() {
+	return ${1:(
+		${2:<div>${3}</div>}
+	);}
+}
+endsnippet
+
+
+# PropTypes
+snippet pt "PropTypes Definition" b
+${1:`!v expand('%:t:r')`.}propTypes = {
+	${2:className}: ${3:PropTypes.string},
+};
+endsnippet
+
+snippet  pt.a "PropTypes Array" w
+PropTypes.array${1:,}
+endsnippet
+
+snippet   pt.b "PropTypes Boolean" w
+PropTypes.bool${1:,}
+endsnippet
+
+snippet pt.f "PropTypes Function" w
+PropTypes.func${1:,}
+endsnippet
+
+snippet pt.n "PropTypes Number" w
+PropTypes.number${1:,}
+endsnippet
+
+snippet pt.o "PropTypes Object" w
+PropTypes.object${1:,}
+endsnippet
+
+snippet pt.s "PropType String" w
+PropTypes.string${1:,}
+endsnippet
+
+snippet pt.no "PropTypes Node" w
+PropTypes.node${1:,}
+endsnippet
+
+snippet pt.e "PropTypes Element" w
+PropTypes.element${1:,}
+endsnippet
+
+snippet pt.io "PropTypes instanceOf" w
+PropTypes.instanceOf(${2:PropTypes.string})${1:,}
+endsnippet
+
+snippet pt.one "PropTypes oneOf" w
+PropTypes.oneOf(['$2'$3])${1:,}
+endsnippet
+
+snippet pt.onet "PropTypes oneOfType" w
+PropTypes.oneOfType([
+	$2
+])${1:,}
+endsnippet
+
+snippet pt.ao "PropTypes arrayOf" w
+PropTypes.arrayOf(${2:PropTypes.string})${1:,}
+endsnippet
+
+snippet pt.oo "PropTypes objectOf" w
+PropTypes.objectOf(${2:PropTypes.string})${1:,}
+endsnippet
+
+snippet pt.sh "PropTyes Shape" w
+PropTypes.shape({
+	$2
+})${1:,}
+endsnippet
+
+snippet ir "isRequired" w
+isRequired,
+endsnippet
+
+snippet rs "React useState"
+const [$1, set${1}] = useState(${0:''})
+endsnippet
+
+snippet test "Test"
+test("${1:test}", ${2:async}() => {
+	${3:// ...}
+});
+endsnippet
+
+snippet ex "Expect"
+expect(${1:1+1}).toBe(${2:2});
+endsnippet
+
+
+snippet route "New Route"
+import express from "express";
+
+const ${1:some}Routes = express.Router();
+
+${0:// TODO}
+
+export default ${1:some}Routes;
+endsnippet
+
+snippet l "log"
+log(${0});
+endsnippet
+
+snippet ehs "errorHandlers.silent"
+await errorHandlers.silent(async () => {
+	${0:// todo}
+});
+endsnippet
+
+snippet eha "errorHandlers.safe"
+await errorHandlers.safe({
+	action: async () => {
+		${0:// todo}
+	},
+	teardown: async () => {
+		// todo
+	},
+});
+endsnippet

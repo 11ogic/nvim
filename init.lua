@@ -2,6 +2,7 @@ require("core.plugins")
 require("core.options")
 require("core.keymaps")
 
+-- Load machine specific configuration
 local config_path = vim.fn.stdpath("config")
 local current_config_path = config_path .. "/lua/config/machine_specific.lua"
 if not vim.loop.fs_stat(current_config_path) then

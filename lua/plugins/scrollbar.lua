@@ -1,7 +1,7 @@
 return {
   "petertriho/nvim-scrollbar",
   dependencies = {
-    -- "kevinhwang91/nvim-hlslens",
+    "kevinhwang91/nvim-hlslens",
   },
   config = function()
     local group = vim.api.nvim_create_augroup("scrollbar_set_git_colors", {})
