@@ -9,7 +9,6 @@ opt.tabstop = 2
 opt.shiftwidth = 2
 opt.expandtab = true
 opt.autoindent = true
-opt.smartindent = true
 
 -- no wrap
 opt.wrap = false
@@ -34,4 +33,3 @@ opt.smartcase = true
 -- appearance
 opt.termguicolors = true
 opt.signcolumn = "yes"
-vim.cmd[[colorscheme tokyonight-storm]]

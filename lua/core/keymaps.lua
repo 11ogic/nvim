@@ -21,7 +21,6 @@ local nmappings = {
   { from = "<leader>x", to = ":x<CR>", mode = mode_nv },
   -- plugin
   { from = "<leader>e", to = ":NvimTreeToggle<CR>", mode = mode_nv },
-  { from = "<C-n>", to = ":NvimTreeFocus<CR>", mode = mode_nv },
 }
 
 for _, mapping in ipairs(nmappings) do
