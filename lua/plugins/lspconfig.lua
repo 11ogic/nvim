@@ -64,6 +64,7 @@ module.config = {
           'texlab',
           'pyright',
           'yamlls',
+          'volar',
         }
       })
 
@@ -162,7 +163,14 @@ module.config = {
       })
 
       lspconfig.gopls.setup {}
-
+      lspconfig.volar.setup {
+        filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json' },
+        init_options = {
+          typescript = {
+            server_path = vim.fn.system("which typescript")
+          },
+        }
+      }
       lsp.setup()
 
       -- Neovim hasn't added foldingRange to default capabilities, users must add it manually
@@ -209,6 +217,7 @@ module.config = {
           "typescript",
           "typescriptreact",
           "yaml",
+          "vue"
         },
         cli_options = {
           arrow_parens = "always",
