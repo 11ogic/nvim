@@ -1,3 +1,5 @@
+local home = os.getenv("HOME")
+
 local module = {}
 
 local tool = {}
@@ -98,8 +100,8 @@ module.config = {
 
       lsp.format_on_save({
         format_opts = {
-          -- async = false,
-          -- timeout_ms = 10000,
+          async = false,
+          timeout_ms = 10000
         },
       })
 
@@ -167,7 +169,9 @@ module.config = {
         filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json' },
         init_options = {
           typescript = {
-            server_path = vim.fn.system("which typescript")
+            tsdk = home .. "/.nvm/versions/node/v20.11.1/lib/node_modules/typescript/lib"
+            -- Alternative location if installed as root:
+            -- tsdk = '/usr/local/lib/node_modules/typescript/lib'
           },
         }
       }
