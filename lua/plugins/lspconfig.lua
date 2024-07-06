@@ -1,5 +1,3 @@
-local home = os.getenv("HOME")
-
 local module = {}
 
 local tool = {}
@@ -110,6 +108,7 @@ module.config = {
       require("config.lsp.lua").setup(lspconfig, lsp)
       require("config.lsp.json").setup(lspconfig, lsp)
       require("config.lsp.html").setup(lspconfig, lsp)
+      require("config.lsp.vue").setup(lspconfig, lsp)
 
       lspconfig.tsserver.setup {
         init_options = {
@@ -165,16 +164,6 @@ module.config = {
       })
 
       lspconfig.gopls.setup {}
-      lspconfig.volar.setup {
-        filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json' },
-        init_options = {
-          typescript = {
-            tsdk = home .. "/.nvm/versions/node/v20.11.1/lib/node_modules/typescript/lib"
-            -- Alternative location if installed as root:
-            -- tsdk = '/usr/local/lib/node_modules/typescript/lib'
-          },
-        }
-      }
       lsp.setup()
 
       -- Neovim hasn't added foldingRange to default capabilities, users must add it manually
