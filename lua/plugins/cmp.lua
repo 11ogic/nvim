@@ -10,14 +10,14 @@ local function mapping()
   return {
     ["<CR>"] = cmp.config.disable,
     -- <C-n> and <C-p> for navigating snippets
-    ["<C-n>"] = cmp.mapping(function()
+    ["<C-j>"] = cmp.mapping(function()
       if luasnip.jumpable(1) then luasnip.jump(1) end
     end, { "i", "c" }),
-    ["<C-p>"] = cmp.mapping(function()
+    ["<C-k>"] = cmp.mapping(function()
       if luasnip.jumpable(-1) then luasnip.jump(-1) end
     end, { "i", "c" }),
-    ["<C-k>"] = cmp.mapping(function() cmp.select_prev_item { behavior = cmp.SelectBehavior.Select } end, { "i", "c" }),
-    ["<C-j>"] = cmp.mapping(function()
+    ["<C-p>"] = cmp.mapping(function() cmp.select_prev_item { behavior = cmp.SelectBehavior.Select } end, { "i", "c" }),
+    ["<C-n>"] = cmp.mapping(function()
       if cmp.visible() then
         cmp.select_next_item { behavior = cmp.SelectBehavior.Select }
       else
