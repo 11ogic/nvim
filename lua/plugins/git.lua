@@ -48,13 +48,13 @@ return {
         },
         on_attach = function(bufnr)
           local gs = package.loaded.gitsigns
-          
+
           local function map(mode, l, r, opts)
             opts = opts or {}
             opts.buffer = bufnr
             vim.keymap.set(mode, l, r, opts)
           end
-          
+
           -- 导航
           map("n", "]c", function()
             if vim.wo.diff then
@@ -65,7 +65,7 @@ return {
             end)
             return "<Ignore>"
           end, { expr = true, desc = "下一个 Git 变更" })
-          
+
           map("n", "[c", function()
             if vim.wo.diff then
               return "[c"
@@ -75,7 +75,7 @@ return {
             end)
             return "<Ignore>"
           end, { expr = true, desc = "上一个 Git 变更" })
-          
+
           -- 动作
           map("n", "<leader>hs", gs.stage_hunk, { desc = "暂存变更" })
           map("n", "<leader>hr", gs.reset_hunk, { desc = "重置变更" })
@@ -102,7 +102,7 @@ return {
       })
     end,
   },
-  
+
   -- Fugitive（Git命令集成）
   {
     "tpope/vim-fugitive",
@@ -112,4 +112,4 @@ return {
       { "<leader>gb", "<cmd>Gblame<cr>", desc = "Git blame" },
     },
   },
-} 
+}

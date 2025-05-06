@@ -53,6 +53,9 @@ local M = {
 
     -- 粘贴不覆盖寄存器
     {"v", "p", '"_dP', { desc = "粘贴不覆盖寄存器", noremap = true }},
+
+    -- 查看通知历史
+    {"n", "<leader>no", "<cmd>Telescope notify<cr>", { desc = "查看通知历史", noremap = true, silent = true }},
 }
 
 -- 应用所有键映射

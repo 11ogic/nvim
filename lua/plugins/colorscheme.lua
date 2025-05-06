@@ -7,7 +7,7 @@ return {
         require("nightfox").setup({
           options = {
             -- 透明背景
-            transparent = true,
+            transparent = false,
             -- 终端颜色
             terminal_colors = true,
             -- 样式: "italic", "bold", "underline", "strikethrough"
@@ -29,24 +29,16 @@ return {
                 -- 可以添加自定义颜色覆盖
               },
               -- 特定变体的颜色覆盖
-              nightfox = {
+              carbonfox = {
                 -- 增强橙色调
-                orange = "#ff9e64",
-              },
-              duskfox = {
-                -- 特别推荐duskfox变体，它有更多橙色调
-                orange = "#ffb380",
-              },
-              nordfox = {
-                -- 增强橙色
-                orange = "#d08770", 
+                orange = "#d08770",
               },
             },
           },
         })
-        
+
         -- 应用主题
-        vim.cmd("colorscheme duskfox")  -- 或使用变体: duskfox, nordfox, terafox, carbonfox
+        vim.cmd("colorscheme carbonfox")  -- 或使用变体: duskfox, nordfox, terafox, carbonfox
       end,
     },
   }

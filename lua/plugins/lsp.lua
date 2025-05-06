@@ -24,27 +24,30 @@ return {
           }
         }
       })
-      
+
       -- 设置Mason-lspconfig
       require("mason-lspconfig").setup({
         ensure_installed = {
-          "lua_ls", -- Lua
-          "pyright", -- Python
-          "ts_ls", -- TypeScript
-          "jsonls", -- JSON
-          "html", -- HTML
-          "cssls", -- CSS
+          "lua_ls",     -- Lua
+          "pyright",    -- Python
+          "ts_ls",      -- TypeScript/JavaScript
+          "jsonls",     -- JSON
+          "html",       -- HTML
+          "cssls",      -- CSS
+          "gopls",      -- Go
+          "volar",      -- Vue
+          "eslint",     -- ESLint
         },
         automatic_installation = true,
       })
-      
+
       -- 状态通知
       require("fidget").setup()
-      
+
       -- 设置nvim-cmp
       local cmp = require("cmp")
       local luasnip = require("luasnip")
-      
+
       cmp.setup({
         snippet = {
           expand = function(args)
@@ -85,16 +88,16 @@ return {
           { name = "path" },
         }),
       })
-      
+
       -- LSP设置
       local lspconfig = require("lspconfig")
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
-      
+
       -- 设置按键映射函数
       local on_attach = function(_, bufnr)
         local keymap = vim.keymap
         local opts = { noremap = true, silent = true, buffer = bufnr }
-        
+
         -- LSP导航
         keymap.set("n", "gd", vim.lsp.buf.definition, opts)
         keymap.set("n", "gr", vim.lsp.buf.references, opts)
@@ -102,20 +105,20 @@ return {
         keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
         keymap.set("n", "K", vim.lsp.buf.hover, opts)
         keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts)
-        
+
         -- 诊断
         keymap.set("n", "<leader>D", vim.diagnostic.open_float, opts)
         keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
         keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
-        
+
         -- 重命名和代码操作
         keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
         keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
-        
+
         -- 格式化
         keymap.set("n", "<leader>f", function() vim.lsp.buf.format { async = true } end, opts)
       end
-      
+
       -- 服务器设置
       local servers = {
         "lua_ls",
@@ -124,16 +127,21 @@ return {
         "jsonls",
         "html",
         "cssls",
+        "gopls",
+        "volar",
+        "eslint",
       }
-      
+
       -- 基本服务器设置循环
       for _, server in ipairs(servers) do
-        lspconfig[server].setup({
-          capabilities = capabilities,
-          on_attach = on_attach,
-        })
+        if server ~= "lua_ls" and server ~= "gopls" and server ~= "volar" then
+          lspconfig[server].setup({
+            capabilities = capabilities,
+            on_attach = on_attach,
+          })
+        end
       end
-      
+
       -- Lua特殊设置
       lspconfig.lua_ls.setup({
         capabilities = capabilities,
@@ -153,6 +161,28 @@ return {
           },
         },
       })
+
+      -- Go特殊设置
+      lspconfig.gopls.setup({
+        capabilities = capabilities,
+        on_attach = on_attach,
+        settings = {
+          gopls = {
+            analyses = {
+              unusedparams = true,
+            },
+            staticcheck = true,
+            gofumpt = true,
+          },
+        },
+      })
+
+      -- Vue特殊设置
+      lspconfig.volar.setup({
+        capabilities = capabilities,
+        on_attach = on_attach,
+        filetypes = {'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json'},
+      })
     end,
   },
-} 
+}
