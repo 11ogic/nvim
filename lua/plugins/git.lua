@@ -22,16 +22,7 @@ return {
           follow_files = true,
         },
         attach_to_untracked = true,
-        current_line_blame = false,
-        current_line_blame_opts = {
-          virt_text = true,
-          virt_text_pos = "eol",
-          delay = 1000,
-          ignore_whitespace = false,
-        },
-        current_line_blame_formatter_opts = {
-          relative_time = false,
-        },
+        current_line_blame = true,
         sign_priority = 6,
         update_debounce = 100,
         status_formatter = nil,
@@ -42,9 +33,6 @@ return {
           relative = "cursor",
           row = 0,
           col = 1,
-        },
-        yadm = {
-          enable = false,
         },
         on_attach = function(bufnr)
           local gs = package.loaded.gitsigns
@@ -112,4 +100,15 @@ return {
       { "<leader>gb", "<cmd>Gblame<cr>", desc = "Git blame" },
     },
   },
+
+  -- Lazygit
+  {
+		"kdheepak/lazygit.nvim",
+		config = function()
+			vim.g.lazygit_floating_window_scaling_factor = 0.77
+			vim.g.lazygit_floating_window_winblend = 0
+			vim.g.lazygit_use_neovim_remote = true
+			vim.keymap.set("n", "<c-g>", ":LazyGit<CR>", { noremap = true, silent = true })
+		end
+	},
 }
