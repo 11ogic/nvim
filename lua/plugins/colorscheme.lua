@@ -7,7 +7,7 @@ return {
         require("nightfox").setup({
           options = {
             -- 透明背景
-            transparent = false,
+            transparent = true,
             -- 终端颜色
             terminal_colors = true,
             -- 样式: "italic", "bold", "underline", "strikethrough"
@@ -26,12 +26,7 @@ return {
             colors = {
               -- 所有变体共享的颜色覆盖
               all = {
-                -- 可以添加自定义颜色覆盖
-              },
-              -- 特定变体的颜色覆盖
-              carbonfox = {
-                -- 增强橙色调
-                orange = "#d08770",
+                -- custom
               },
             },
           },

@@ -6,9 +6,10 @@ return {
     config = function()
       require("lualine").setup({
         options = {
-          theme = "nordfox",
+          theme = "carbonfox",
           component_separators = { left = "", right = "" },
           section_separators = { left = "", right = "" },
+          globalstatus = true, -- 只在最底部显示一条全局状态栏
         },
       })
     end,
@@ -23,13 +24,13 @@ return {
       require("bufferline").setup({
         options = {
           mode = "buffers",
-          separator_style = "slant",
+          separator_style = "thin",
           offsets = {
             {
               filetype = "NvimTree",
-              text = "文件浏览器",
+              text = "====== File Explorer ======",
               highlight = "Directory",
-              text_align = "left",
+              text_align = "center",
             }
           },
         },
@@ -46,7 +47,7 @@ return {
       require("nvim-tree").setup({
         sort_by = "case_sensitive",
         view = {
-          width = 30,
+          width = 40,
         },
         renderer = {
           group_empty = true,
