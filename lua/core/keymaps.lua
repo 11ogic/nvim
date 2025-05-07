@@ -43,7 +43,23 @@ local M = {
   { "n", "<leader>w", ":w<CR>", { desc = "保存", noremap = true, silent = true } },
 
   -- 快速退出
-  { "n", "<leader>q", ":q<CR>", { desc = "退出", noremap = true, silent = true } },
+  { "n", "<leader>q", function()
+    -- 获取当前列出的buffer数量
+    local buffer_count = #vim.fn.getbufinfo({buflisted=1})
+    if buffer_count > 1 then
+      -- 记住当前buffer编号
+      local current_buffer = vim.fn.bufnr('%')
+      -- 切换到上一个buffer (这样当前buffer关闭后不会显示空白)
+      vim.cmd('BufferLineCyclePrev')
+      -- 关闭刚才的buffer
+      vim.cmd('bdelete ' .. current_buffer)
+    else
+      -- 如果只有一个buffer和一个窗口，退出Neovim
+      vim.cmd('quit')
+    end
+  end,
+  { desc = "智能关闭(Buffer/窗口/退出)", noremap = true, silent = true } },
+  { "n", "<leader>Q", ":qa<CR>", { desc = "退出所有", noremap = true, silent = true } },
 
   -- 插入模式
   -- 快速退出插入模式

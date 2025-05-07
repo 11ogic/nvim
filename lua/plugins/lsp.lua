@@ -35,12 +35,10 @@ return {
           "html",       -- HTML
           "cssls",      -- CSS
           "gopls",      -- Go
-          "volar",      -- Vue
           "eslint",     -- ESLint
         },
         automatic_installation = true,
       })
-
       -- 状态通知
       require("fidget").setup()
 
@@ -116,7 +114,7 @@ return {
         keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
 
         -- 格式化
-        keymap.set("n", "<leader>f", function() vim.lsp.buf.format { async = true } end, opts)
+        keymap.set("n", "<leader>F", function() vim.lsp.buf.format { async = true } end, opts)
       end
 
       -- 服务器设置
@@ -128,13 +126,12 @@ return {
         "html",
         "cssls",
         "gopls",
-        "volar",
         "eslint",
       }
 
       -- 基本服务器设置循环
       for _, server in ipairs(servers) do
-        if server ~= "lua_ls" and server ~= "gopls" and server ~= "volar" then
+        if server ~= "lua_ls" and server ~= "gopls" then
           lspconfig[server].setup({
             capabilities = capabilities,
             on_attach = on_attach,
@@ -175,13 +172,6 @@ return {
             gofumpt = true,
           },
         },
-      })
-
-      -- Vue特殊设置
-      lspconfig.volar.setup({
-        capabilities = capabilities,
-        on_attach = on_attach,
-        filetypes = {'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json'},
       })
     end,
   },

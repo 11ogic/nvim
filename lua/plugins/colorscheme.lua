@@ -33,7 +33,7 @@ return {
         })
 
         -- 应用主题
-        vim.cmd("colorscheme carbonfox")  -- 或使用变体: duskfox, nordfox, terafox, carbonfox
+        vim.cmd("colorscheme nordfox")  -- 或使用变体: duskfox, nordfox, terafox, carbonfox
       end,
     },
   }

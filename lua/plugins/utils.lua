@@ -80,7 +80,11 @@ return {
     "ggandor/leap.nvim",
     event = { "BufReadPre", "BufNewFile" },
     config = function()
-      require("leap").add_default_mappings()
+      require("leap").setup({})
+      local keymap = vim.keymap
+      keymap.set({'n', 'x', 'o'}, "<leader>j", "<Plug>(leap-forward-to)", { desc = "Leap向前跳转" })
+      keymap.set({'n', 'x', 'o'}, "<leader>k", "<Plug>(leap-backward-to)", { desc = "Leap向后跳转" })
+      keymap.set({'n', 'x', 'o'}, "<leader>g", "<Plug>(leap-from-window)", { desc = "向Leap跨窗口搜索" })
     end,
   },
 
@@ -107,62 +111,6 @@ return {
         { desc = "恢复最后一次会话" })
       vim.keymap.set("n", "<leader>qd", function() require("persistence").stop() end,
         { desc = "不要保存当前会话" })
-    end,
-  },
-
-  -- UI组件
-  {
-    "stevearc/dressing.nvim",
-    event = "VeryLazy",
-    config = function()
-      require("dressing").setup({
-        input = {
-          enabled = true,
-          default_prompt = "Input:",
-          prompt_align = "left",
-          insert_only = true,
-          border = "rounded",
-          relative = "cursor",
-          prefer_width = 40,
-          width = nil,
-          max_width = { 140, 0.9 },
-          min_width = { 20, 0.2 },
-          winblend = 0,
-          winhighlight = "Normal:Normal,NormalNC:NormalNC",
-          override = function(conf)
-            conf.anchor = "SW"
-            return conf
-          end,
-        },
-        select = {
-          enabled = true,
-          backend = { "telescope", "fzf", "builtin" },
-          trim_prompt = true,
-          telescope = nil,
-          fzf = {
-            window = {
-              width = 0.5,
-              height = 0.4,
-            },
-          },
-          builtin = {
-            border = "rounded",
-            relative = "editor",
-            winblend = 0,
-            winhighlight = "Normal:Normal,NormalNC:NormalNC",
-            width = nil,
-            max_width = { 140, 0.8 },
-            min_width = { 40, 0.2 },
-            height = nil,
-            max_height = 0.9,
-            min_height = { 10, 0.2 },
-            override = function(conf)
-              conf.anchor = "NW"
-              return conf
-            end,
-          },
-        },
-      })
     end,
   },
 
@@ -211,22 +159,6 @@ return {
       end
 
       vim.cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()")
-    end,
-  },
-
-  -- 增强通知
-  {
-    "rcarriga/nvim-notify",
-    event = "VeryLazy",
-    config = function()
-      vim.notify = require("notify")
-      require("notify").setup({
-        stages = "fade",
-        timeout = 3000,
-        render = "default",
-        background_colour = "FloatShadow",
-        max_width = 80,
-      })
     end,
   },
 }
