@@ -145,6 +145,16 @@ return {
       "rcarriga/nvim-notify",
     },
     config = function()
+      -- notify 配置
+      require("notify").setup({
+        stages = "fade_in_slide_out",
+        timeout = 3000,
+        max_width = 50, -- 设置通知窗口的最大宽度
+        max_height = 10, -- 设置通知窗口的最大高度
+        background_colour = "Normal",
+        minimum_width = 20, -- 设置通知窗口的最小宽度
+      })
+      -- noice 配置
       require("noice").setup({
         lsp = {
           -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
@@ -162,11 +172,12 @@ return {
       })
       -- 诊断浮动窗口配置
       vim.diagnostic.config({
+        virtual_text = false,
         float = {
           border = "rounded",
-          max_width = 80,
-          max_height = 10,
-          focusable = false,
+          max_width = 70,
+          max_height = 30,
+          focusable = true,
           close_events = { "BufLeave", "CursorMoved", "InsertEnter" },
         },
       })

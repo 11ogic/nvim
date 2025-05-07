@@ -19,15 +19,19 @@ local M = {
   { "n", "<C-l>", "<C-w>l", { desc = "右窗口导航", noremap = true } },
 
   -- 窗口管理
-  { "n", "<leader>sv", "<C-w>v", { desc = "垂直分割", noremap = true } },
-  { "n", "<leader>sh", "<C-w>s", { desc = "水平分割", noremap = true } },
-  { "n", "<leader>se", "<C-w>=", { desc = "窗口等宽", noremap = true } },
-  { "n", "<leader>sx", ":close<CR>", { desc = "关闭当前窗口", noremap = true } },
+  { "n", "<leader>q", ":close<CR>", { desc = "关闭当前窗口", noremap = true, silent = true } },
+  { "n", "<leader>Q", ":qall<CR>", { desc = "关闭所有窗口", noremap = true, silent = true } },
+  { "n", "<leader>w", ":w<CR>", { desc = "保存文件", noremap = true, silent = true } },
+  { "n", "<leader>W", ":wall<CR>", { desc = "保存所有文件", noremap = true, silent = true } },
+  { "n", "<leader>sv", ":vsplit<CR>", { desc = "垂直分割窗口", noremap = true, silent = true } },
+  { "n", "<leader>sh", ":split<CR>", { desc = "水平分割窗口", noremap = true, silent = true } },
+  { "n", "<leader>se", "<C-w>=", { desc = "等分窗口", noremap = true, silent = true } },
 
-  -- 缓冲区导航
-  { "n", "<S-h>", ":bprevious<CR>", { desc = "上一个缓冲区", noremap = true, silent = true } },
-  { "n", "<S-l>", ":bnext<CR>", { desc = "下一个缓冲区", noremap = true, silent = true } },
-  { "n", "<leader>x", ":bdelete<CR>", { desc = "关闭当前缓冲区", noremap = true, silent = true } },
+  -- 缓冲区管理
+  { "n", "<leader>bd", ":bd<CR>", { desc = "删除当前缓冲区", noremap = true, silent = true } },
+  { "n", "<leader>bD", ":!bd<CR>", { desc = "强制删除当前缓冲区", noremap = true, silent = true } },
+  { "n", "<leader>bn", ":bnext<CR>", { desc = "下一个缓冲区", noremap = true, silent = true } },
+  { "n", "<leader>bp", ":bprevious<CR>", { desc = "上一个缓冲区", noremap = true, silent = true } },
 
   -- 查看通知历史
   { "n", "<leader>no", "<cmd>Telescope notify<cr>", { desc = "查看通知历史", noremap = true, silent = true } },
@@ -38,28 +42,6 @@ local M = {
 
   -- 清除搜索高亮
   { "n", "<leader>nh", ":nohl<CR>", { desc = "清除搜索高亮", noremap = true, silent = true } },
-
-  -- 快速保存
-  { "n", "<leader>w", ":w<CR>", { desc = "保存", noremap = true, silent = true } },
-
-  -- 快速退出
-  { "n", "<leader>q", function()
-    -- 获取当前列出的buffer数量
-    local buffer_count = #vim.fn.getbufinfo({buflisted=1})
-    if buffer_count > 1 then
-      -- 记住当前buffer编号
-      local current_buffer = vim.fn.bufnr('%')
-      -- 切换到上一个buffer (这样当前buffer关闭后不会显示空白)
-      vim.cmd('BufferLineCyclePrev')
-      -- 关闭刚才的buffer
-      vim.cmd('bdelete ' .. current_buffer)
-    else
-      -- 如果只有一个buffer和一个窗口，退出Neovim
-      vim.cmd('quit')
-    end
-  end,
-  { desc = "智能关闭(Buffer/窗口/退出)", noremap = true, silent = true } },
-  { "n", "<leader>Q", ":qa<CR>", { desc = "退出所有", noremap = true, silent = true } },
 
   -- 插入模式
   -- 快速退出插入模式
