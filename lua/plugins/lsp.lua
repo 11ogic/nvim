@@ -12,6 +12,7 @@ return {
       "L3MON4D3/LuaSnip",
       "saadparwaiz1/cmp_luasnip",
       "j-hui/fidget.nvim",
+      "nvim-telescope/telescope.nvim",
     },
     config = function()
       -- 设置Mason
@@ -35,12 +36,10 @@ return {
           "html",       -- HTML
           "cssls",      -- CSS
           "gopls",      -- Go
-          "volar",      -- Vue
           "eslint",     -- ESLint
         },
         automatic_installation = true,
       })
-
       -- 状态通知
       require("fidget").setup()
 
@@ -92,6 +91,7 @@ return {
       -- LSP设置
       local lspconfig = require("lspconfig")
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
+      local telescope = require("telescope.builtin")
 
       -- 设置按键映射函数
       local on_attach = function(_, bufnr)
@@ -99,15 +99,15 @@ return {
         local opts = { noremap = true, silent = true, buffer = bufnr }
 
         -- LSP导航
-        keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-        keymap.set("n", "gr", vim.lsp.buf.references, opts)
+        keymap.set("n", "gd", telescope.lsp_definitions, opts)
+        keymap.set("n", "gr", telescope.lsp_references, opts)
         keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
         keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
         keymap.set("n", "K", vim.lsp.buf.hover, opts)
         keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts)
 
         -- 诊断
-        keymap.set("n", "<leader>D", vim.diagnostic.open_float, opts)
+        keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)
         keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
         keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
 
@@ -116,7 +116,7 @@ return {
         keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
 
         -- 格式化
-        keymap.set("n", "<leader>f", function() vim.lsp.buf.format { async = true } end, opts)
+        keymap.set("n", "<leader>F", function() vim.lsp.buf.format { async = true } end, opts)
       end
 
       -- 服务器设置
@@ -128,13 +128,12 @@ return {
         "html",
         "cssls",
         "gopls",
-        "volar",
         "eslint",
       }
 
       -- 基本服务器设置循环
       for _, server in ipairs(servers) do
-        if server ~= "lua_ls" and server ~= "gopls" and server ~= "volar" then
+        if server ~= "lua_ls" and server ~= "gopls" then
           lspconfig[server].setup({
             capabilities = capabilities,
             on_attach = on_attach,
@@ -175,13 +174,6 @@ return {
             gofumpt = true,
           },
         },
-      })
-
-      -- Vue特殊设置
-      lspconfig.volar.setup({
-        capabilities = capabilities,
-        on_attach = on_attach,
-        filetypes = {'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json'},
       })
     end,
   },
