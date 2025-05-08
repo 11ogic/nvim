@@ -40,8 +40,6 @@ return {
         },
         automatic_installation = true,
       })
-      -- 状态通知
-      require("fidget").setup()
 
       -- 设置nvim-cmp
       local cmp = require("cmp")
@@ -62,7 +60,11 @@ return {
           ["<C-e>"] = cmp.mapping.abort(), -- 关闭补全窗口
           ["<CR>"] = cmp.mapping.confirm({ select = false }), -- 确认选择
           ["<Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
+            -- 当 Copilot 有建议时，让它优先
+            local copilot_keys = vim.fn["copilot#Accept"]()
+            if copilot_keys ~= "" then
+              vim.api.nvim_feedkeys(copilot_keys, "i", true)
+            elseif cmp.visible() then
               cmp.select_next_item()
             elseif luasnip.expand_or_jumpable() then
               luasnip.expand_or_jump()
@@ -91,7 +93,6 @@ return {
       -- LSP设置
       local lspconfig = require("lspconfig")
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
-      local telescope = require("telescope.builtin")
 
       -- 设置按键映射函数
       local on_attach = function(_, bufnr)
@@ -99,8 +100,8 @@ return {
         local opts = { noremap = true, silent = true, buffer = bufnr }
 
         -- LSP导航
-        keymap.set("n", "gd", telescope.lsp_definitions, opts)
-        keymap.set("n", "gr", telescope.lsp_references, opts)
+        keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+        keymap.set("n", "gr", vim.lsp.buf.references, opts)
         keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
         keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
         keymap.set("n", "K", vim.lsp.buf.hover, opts)

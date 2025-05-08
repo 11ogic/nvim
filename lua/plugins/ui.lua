@@ -151,7 +151,7 @@ return {
         timeout = 3000,
         max_width = 50, -- 设置通知窗口的最大宽度
         max_height = 10, -- 设置通知窗口的最大高度
-        background_colour = "Normal",
+        background_colour = "#000000",
         minimum_width = 20, -- 设置通知窗口的最小宽度
       })
       -- noice 配置
