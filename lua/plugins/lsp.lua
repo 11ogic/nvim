@@ -51,36 +51,13 @@ return {
             luasnip.lsp_expand(args.body)
           end,
         },
+        completion = {
+          border = "rounded",
+          winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None",
+        },
         mapping = cmp.mapping.preset.insert({
-          ["<C-k>"] = cmp.mapping.select_prev_item(), -- 上一个项目
-          ["<C-j>"] = cmp.mapping.select_next_item(), -- 下一个项目
-          ["<C-b>"] = cmp.mapping.scroll_docs(-4), -- 向上滚动文档
-          ["<C-f>"] = cmp.mapping.scroll_docs(4), -- 向下滚动文档
-          ["<C-Space>"] = cmp.mapping.complete(), -- 显示补全
           ["<C-e>"] = cmp.mapping.abort(), -- 关闭补全窗口
           ["<CR>"] = cmp.mapping.confirm({ select = false }), -- 确认选择
-          ["<Tab>"] = cmp.mapping(function(fallback)
-            -- 当 Copilot 有建议时，让它优先
-            local copilot_keys = vim.fn["copilot#Accept"]()
-            if copilot_keys ~= "" then
-              vim.api.nvim_feedkeys(copilot_keys, "i", true)
-            elseif cmp.visible() then
-              cmp.select_next_item()
-            elseif luasnip.expand_or_jumpable() then
-              luasnip.expand_or_jump()
-            else
-              fallback()
-            end
-          end, { "i", "s" }),
-          ["<S-Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_prev_item()
-            elseif luasnip.jumpable(-1) then
-              luasnip.jump(-1)
-            else
-              fallback()
-            end
-          end, { "i", "s" }),
         }),
         sources = cmp.config.sources({
           { name = "nvim_lsp" },
