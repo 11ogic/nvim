@@ -2,9 +2,10 @@ return {
   -- LSP配置
   {
     "neovim/nvim-lspconfig",
+    event = { "BufReadPre", "BufNewFile" },
     dependencies = {
-      "williamboman/mason.nvim",
-      "williamboman/mason-lspconfig.nvim",
+      { "mason-org/mason.nvim", version = "^1.0.0" },
+      { "mason-org/mason-lspconfig.nvim", version = "^1.0.0" },
       "hrsh7th/nvim-cmp",
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-buffer",
@@ -38,10 +39,8 @@ return {
           "gopls",      -- Go
           "eslint",     -- ESLint
         },
-        automatic_installation = true,
+        automatic_installation = true, 
       })
-      -- 状态通知
-      require("fidget").setup()
 
       -- 设置nvim-cmp
       local cmp = require("cmp")
@@ -53,32 +52,13 @@ return {
             luasnip.lsp_expand(args.body)
           end,
         },
+        completion = {
+          border = "rounded",
+          winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None",
+        },
         mapping = cmp.mapping.preset.insert({
-          ["<C-k>"] = cmp.mapping.select_prev_item(), -- 上一个项目
-          ["<C-j>"] = cmp.mapping.select_next_item(), -- 下一个项目
-          ["<C-b>"] = cmp.mapping.scroll_docs(-4), -- 向上滚动文档
-          ["<C-f>"] = cmp.mapping.scroll_docs(4), -- 向下滚动文档
-          ["<C-Space>"] = cmp.mapping.complete(), -- 显示补全
           ["<C-e>"] = cmp.mapping.abort(), -- 关闭补全窗口
           ["<CR>"] = cmp.mapping.confirm({ select = false }), -- 确认选择
-          ["<Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_next_item()
-            elseif luasnip.expand_or_jumpable() then
-              luasnip.expand_or_jump()
-            else
-              fallback()
-            end
-          end, { "i", "s" }),
-          ["<S-Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_prev_item()
-            elseif luasnip.jumpable(-1) then
-              luasnip.jump(-1)
-            else
-              fallback()
-            end
-          end, { "i", "s" }),
         }),
         sources = cmp.config.sources({
           { name = "nvim_lsp" },
@@ -91,7 +71,6 @@ return {
       -- LSP设置
       local lspconfig = require("lspconfig")
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
-      local telescope = require("telescope.builtin")
 
       -- 设置按键映射函数
       local on_attach = function(_, bufnr)
@@ -99,8 +78,8 @@ return {
         local opts = { noremap = true, silent = true, buffer = bufnr }
 
         -- LSP导航
-        keymap.set("n", "gd", telescope.lsp_definitions, opts)
-        keymap.set("n", "gr", telescope.lsp_references, opts)
+        keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+        keymap.set("n", "gr", vim.lsp.buf.references, opts)
         keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
         keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
         keymap.set("n", "K", vim.lsp.buf.hover, opts)

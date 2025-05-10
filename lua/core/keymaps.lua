@@ -20,7 +20,7 @@ local M = {
 
   -- 窗口管理
   { "n", "<leader>q", ":close<CR>", { desc = "关闭当前窗口", noremap = true, silent = true } },
-  { "n", "<leader>Q", ":qall<CR>", { desc = "关闭所有窗口", noremap = true, silent = true } },
+  { "n", "<leader>qq", ":qall<CR>", { desc = "关闭所有窗口", noremap = true, silent = true } },
   { "n", "<leader>w", ":w<CR>", { desc = "保存文件", noremap = true, silent = true } },
   { "n", "<leader>W", ":wall<CR>", { desc = "保存所有文件", noremap = true, silent = true } },
   { "n", "<leader>sv", ":vsplit<CR>", { desc = "垂直分割窗口", noremap = true, silent = true } },

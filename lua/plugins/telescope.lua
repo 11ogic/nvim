@@ -4,7 +4,7 @@ return {
     "nvim-telescope/telescope.nvim",
     dependencies = {
       "nvim-lua/plenary.nvim",
-      { "nvim-telescope/telescope-fzf-native.nvim", build = "make" }
+      { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     },
     config = function()
       local telescope = require("telescope")
@@ -17,6 +17,10 @@ return {
               ["<C-k>"] = actions.move_selection_previous,
               ["<C-j>"] = actions.move_selection_next,
               ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
+              ["<leader>q"] = actions.close,
+            },
+            n = {
+              ["<leader>q"] = actions.close,
             },
           },
           -- ignore files
@@ -51,10 +55,16 @@ return {
 
       -- 键盘映射
       local keymap = vim.keymap
+      -- Basic Search
       keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "查找文件" })
       keymap.set("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { desc = "通过Grep查找" })
       keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<cr>", { desc = "查找缓冲区" })
       keymap.set("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", { desc = "查找帮助" })
+      
+      -- Advanced Search
+      keymap.set("n", "<leader>fa", "<cmd>Telescope find_files hidden=true<cr>", { desc = "查找所有文件（包括隐藏文件）" })
+      keymap.set("n", "<leader>fw", "<cmd>Telescope grep_string<cr>", { desc = "查找当前单词" })
+      keymap.set("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>", { desc = "查找最近文件" })
     end,
   },
 }
