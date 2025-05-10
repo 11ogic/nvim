@@ -21,4 +21,19 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 -- 插件设置
-require("lazy").setup("plugins")
+require("lazy").setup("plugins", {
+  git = {
+    timeout = 300, -- 5 minutes timeout
+    ssl_verify = false, -- Disable SSL verification
+  },
+  install = {
+    colorscheme = { "nordfox" },
+  },
+  checker = {
+    enabled = true,
+    notify = false,
+  },
+  change_detection = {
+    notify = false,
+  },
+})
