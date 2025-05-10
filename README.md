@@ -1,3 +1,6 @@
+# 🚀 My Neovim Configuration
+A personal Neovim configuration built with Lua, sharing my learning journey in customizing Neovim for better coding experience.
+
 ## ⚡️ Requirements:
 - Neovim >= 0.10.0
 - Git >= 2.19.0
