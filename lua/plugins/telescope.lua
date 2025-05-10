@@ -31,14 +31,14 @@ return {
             ".git",
             "__pycache__",
           },
-          hidden = true, -- show hidden files
-          follow = true, -- follow symlinks
+          hidden = false, -- show hidden files
+          follow = false, -- follow symlinks
         },
         pickers = {
           find_files = {
             -- 查找文件时的特定选项
-            hidden = true, -- show hidden files
-            follow = true, -- follow symlinks
+            hidden = false, -- show hidden files
+            follow = false, -- follow symlinks
           }
         },
         extensions = {
