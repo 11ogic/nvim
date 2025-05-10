@@ -1,6 +1,6 @@
 ## ⚡️ Requirements:
 - Neovim >= 0.10.0
-- Git
+- Git >= 2.19.0
 - a [Nerd Font](https://www.nerdfonts.com/)
 
 ## 📝 Configuration Structure
