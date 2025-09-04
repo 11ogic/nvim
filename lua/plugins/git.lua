@@ -35,57 +35,9 @@ return {
           col = 1,
         },
         on_attach = function(bufnr)
-          local gs = package.loaded.gitsigns
-
-          local function map(mode, l, r, opts)
-            opts = opts or {}
-            opts.buffer = bufnr
-            vim.keymap.set(mode, l, r, opts)
+          if _G.setup_gitsigns_keymaps then
+            _G.setup_gitsigns_keymaps(bufnr)
           end
-
-          -- 导航
-          map("n", "]c", function()
-            if vim.wo.diff then
-              return "]c"
-            end
-            vim.schedule(function()
-              gs.next_hunk()
-            end)
-            return "<Ignore>"
-          end, { expr = true, desc = "下一个 Git 变更" })
-
-          map("n", "[c", function()
-            if vim.wo.diff then
-              return "[c"
-            end
-            vim.schedule(function()
-              gs.prev_hunk()
-            end)
-            return "<Ignore>"
-          end, { expr = true, desc = "上一个 Git 变更" })
-
-          -- 动作
-          map("n", "<leader>hs", gs.stage_hunk, { desc = "暂存变更" })
-          map("n", "<leader>hr", gs.reset_hunk, { desc = "重置变更" })
-          map("v", "<leader>hs", function()
-            gs.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
-          end, { desc = "暂存选定变更" })
-          map("v", "<leader>hr", function()
-            gs.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
-          end, { desc = "重置选定变更" })
-          map("n", "<leader>hS", gs.stage_buffer, { desc = "暂存所有变更" })
-          map("n", "<leader>hu", gs.undo_stage_hunk, { desc = "撤销暂存变更" })
-          map("n", "<leader>hR", gs.reset_buffer, { desc = "重置所有变更" })
-          map("n", "<leader>hp", gs.preview_hunk, { desc = "预览变更" })
-          map("n", "<leader>hb", function()
-            gs.blame_line({ full = true })
-          end, { desc = "显示 Git blame" })
-          map("n", "<leader>tb", gs.toggle_current_line_blame, { desc = "切换行 blame" })
-          map("n", "<leader>hd", gs.diffthis, { desc = "显示 Git diff" })
-          map("n", "<leader>hD", function()
-            gs.diffthis("~")
-          end, { desc = "显示与 HEAD 的 Git diff" })
-          map("n", "<leader>td", gs.toggle_deleted, { desc = "切换删除显示" })
         end,
       })
     end,
@@ -108,7 +60,6 @@ return {
 			vim.g.lazygit_floating_window_scaling_factor = 0.77
 			vim.g.lazygit_floating_window_winblend = 0
 			vim.g.lazygit_use_neovim_remote = true
-			vim.keymap.set("n", "<c-g>", ":LazyGit<CR>", { noremap = true, silent = true })
 		end
 	},
 }

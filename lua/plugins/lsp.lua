@@ -72,30 +72,12 @@ return {
       local lspconfig = require("lspconfig")
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-      -- 设置按键映射函数
+      -- 设置按键映射函数 - 键映射已移至 lua/core/keymaps.lua 文件中统一管理
       local on_attach = function(_, bufnr)
-        local keymap = vim.keymap
-        local opts = { noremap = true, silent = true, buffer = bufnr }
-
-        -- LSP导航
-        keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-        keymap.set("n", "gr", vim.lsp.buf.references, opts)
-        keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
-        keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
-        keymap.set("n", "K", vim.lsp.buf.hover, opts)
-        keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts)
-
-        -- 诊断
-        keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)
-        keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
-        keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
-
-        -- 重命名和代码操作
-        keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
-        keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
-
-        -- 格式化
-        keymap.set("n", "<leader>F", function() vim.lsp.buf.format { async = true } end, opts)
+        -- 调用统一的LSP键映射设置函数
+        if _G.setup_lsp_keymaps then
+          _G.setup_lsp_keymaps(bufnr)
+        end
       end
 
       -- 服务器设置

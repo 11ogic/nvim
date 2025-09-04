@@ -81,10 +81,7 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     config = function()
       require("leap").setup({})
-      local keymap = vim.keymap
-      keymap.set({'n', 'x', 'o'}, "<leader>j", "<Plug>(leap-forward-to)", { desc = "Leap向前跳转" })
-      keymap.set({'n', 'x', 'o'}, "<leader>k", "<Plug>(leap-backward-to)", { desc = "Leap向后跳转" })
-      keymap.set({'n', 'x', 'o'}, "<leader>g", "<Plug>(leap-from-window)", { desc = "向Leap跨窗口搜索" })
+      -- 键盘映射已移至 lua/core/keymaps.lua 文件中统一管理
     end,
   },
 
@@ -104,13 +101,7 @@ return {
         options = { "buffers", "curdir", "tabpages", "winsize" },
       })
 
-      -- 键盘映射
-      vim.keymap.set("n", "<leader>qs", function() require("persistence").load() end,
-        { desc = "恢复上次会话" })
-      vim.keymap.set("n", "<leader>ql", function() require("persistence").load({ last = true }) end,
-        { desc = "恢复最后一次会话" })
-      vim.keymap.set("n", "<leader>qd", function() require("persistence").stop() end,
-        { desc = "不要保存当前会话" })
+      -- 键盘映射已移至 lua/core/keymaps.lua 文件中统一管理
     end,
   },
 
@@ -118,11 +109,7 @@ return {
   {
     "akinsho/toggleterm.nvim",
     version = "*",
-    keys = {
-      { "<leader>tt", "<cmd>ToggleTerm direction=float<cr>", desc = "浮动终端" },
-      { "<leader>th", "<cmd>ToggleTerm direction=horizontal<cr>", desc = "水平终端" },
-      { "<leader>tv", "<cmd>ToggleTerm direction=vertical<cr>", desc = "垂直终端" },
-    },
+    -- 键盘映射已移至 lua/core/keymaps.lua 文件中统一管理
     config = function()
       require("toggleterm").setup({
         size = 20,
@@ -147,18 +134,7 @@ return {
         },
       })
 
-      -- 终端中的退出插入模式映射
-      function _G.set_terminal_keymaps()
-        local opts = { noremap = true }
-        vim.api.nvim_buf_set_keymap(0, "t", "<esc>", [[<C-\><C-n>]], opts)
-        vim.api.nvim_buf_set_keymap(0, "t", "jk", [[<C-\><C-n>]], opts)
-        vim.api.nvim_buf_set_keymap(0, "t", "<C-h>", [[<C-\><C-n><C-W>h]], opts)
-        vim.api.nvim_buf_set_keymap(0, "t", "<C-j>", [[<C-\><C-n><C-W>j]], opts)
-        vim.api.nvim_buf_set_keymap(0, "t", "<C-k>", [[<C-\><C-n><C-W>k]], opts)
-        vim.api.nvim_buf_set_keymap(0, "t", "<C-l>", [[<C-\><C-n><C-W>l]], opts)
-      end
-
-      vim.cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()")
+      -- 终端中的键盘映射已移至 lua/core/keymaps.lua 文件中统一管理
     end,
   },
 }
