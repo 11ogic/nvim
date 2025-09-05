@@ -75,9 +75,9 @@ local M = {
   { "n", "<leader>no", "<cmd>Telescope notify<cr>", { desc = "查看通知历史", noremap = true, silent = true } },
 
   -- ========== Leap跳转导航 ==========
-  { {'n', 'x', 'o'}, "<leader>j", "<Plug>(leap-forward-to)", { desc = "Leap向前跳转", noremap = true } },
-  { {'n', 'x', 'o'}, "<leader>k", "<Plug>(leap-backward-to)", { desc = "Leap向后跳转", noremap = true } },
-  { {'n', 'x', 'o'}, "<leader>g", "<Plug>(leap-from-window)", { desc = "Leap跨窗口搜索", noremap = true } },
+  { { 'n', 'x', 'o' }, "<leader>j", "<Plug>(leap-forward-to)", { desc = "Leap向前跳转", noremap = true } },
+  { { 'n', 'x', 'o' }, "<leader>k", "<Plug>(leap-backward-to)", { desc = "Leap向后跳转", noremap = true } },
+  { { 'n', 'x', 'o' }, "<leader>g", "<Plug>(leap-from-window)", { desc = "Leap跨窗口搜索", noremap = true } },
 
   -- ========== 会话管理 (Persistence) ==========
   { "n", "<leader>qs", function() require("persistence").load() end, { desc = "恢复上次会话", noremap = true, silent = true } },
@@ -121,13 +121,14 @@ local function setup_lsp_keymaps(bufnr)
   vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, vim.tbl_extend("force", opts, { desc = "代码操作" }))
 
   -- 格式化
-  vim.keymap.set("n", "<leader>F", function() vim.lsp.buf.format { async = true } end, vim.tbl_extend("force", opts, { desc = "格式化代码" }))
+  vim.keymap.set("n", "<leader>F", function() vim.lsp.buf.format { async = true } end,
+    vim.tbl_extend("force", opts, { desc = "格式化代码" }))
 end
 
 -- GitSigns 专用键映射函数
 local function setup_gitsigns_keymaps(bufnr)
   local gs = package.loaded.gitsigns
-  
+
   local function map(mode, l, r, opts)
     opts = opts or {}
     opts.buffer = bufnr
@@ -182,7 +183,7 @@ end
 -- NvimTree 专用键映射函数
 local function setup_nvimtree_keymaps(bufnr)
   local api = require('nvim-tree.api')
-  
+
   local function opts(desc)
     return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
   end
