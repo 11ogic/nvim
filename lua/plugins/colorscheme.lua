@@ -60,7 +60,7 @@ return {
 
         " 背景和窗口颜色
         :hi NvimTreeNormal       guibg=%s
-        :hi NvimTreeEndOfBuffer  guibg=%s
+        :hi NvimTreeEndOfBuffer  guifg=%s
         :hi NvimTreeWinSeparator guifg=%s guibg=%s
 
         " 文件类型颜色

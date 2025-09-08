@@ -96,7 +96,13 @@ local M = {
   { "n", "<c-g>", ":LazyGit<CR>", { desc = "LazyGit", noremap = true, silent = true } },
 
   -- ========== Copilot ==========
-  { "i", "<Tab>", 'copilot#Accept("<Tab>")', { expr = true, silent = true, desc = "接受Copilot建议" } },
+  { "i", "<C-j>", 'copilot#Next()', { expr = true, silent = true, desc = "下一个Copilot建议" } },
+  { "i", "<C-k>", 'copilot#Previous()', { expr = true, silent = true, desc = "上一个Copilot建议" } },
+
+  -- ========== Vue 开发 ==========
+  { "n", "<leader>vf", function() vim.lsp.buf.format({ async = false }) end, { desc = "格式化 Vue 文件", noremap = true, silent = true } },
+  { "n", "<leader>vr", "<cmd>Telescope lsp_references<cr>", { desc = "查找 Vue 组件引用", noremap = true, silent = true } },
+  { "n", "<leader>vd", "<cmd>Telescope lsp_definitions<cr>", { desc = "跳转到 Vue 组件定义", noremap = true, silent = true } },
 }
 
 -- LSP 专用键映射函数
