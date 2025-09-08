@@ -15,7 +15,7 @@ M.palette = {
     bg_light = "#1f2430",     -- 稍亮背景 (用于对比)
     bg_alt = "#181818",       -- 替代背景色
     bg_very_dark = "#0d0d0d", -- 极深背景色
-    bg_separator = "#1c1c1c", -- 分离器背景
+    bg_separator = "#2c2c2c", -- 分离器背景
     bg_cursor = "#202020",    -- 光标行/列背景
 
     -- 前景色系
@@ -104,7 +104,7 @@ M.bufferline = {
 M.nvimtree = {
     bg = M.palette.bg_alt,                 -- 文件树背景
     separator_bg = M.palette.bg_separator, -- 标题背景
-    separator_fg = M.palette.separator,    -- 分离线颜色
+    separator_fg = M.palette.bg_separator,    -- 分离线颜色
 
     -- 文件夹颜色
     folder_icon = M.semantic.folder,

@@ -57,7 +57,8 @@ return {
               text = "📂 File Explorer",
               highlight = "FileExplorerTitle",
               text_align = "center",
-              separator = true,
+              separator = false,
+              padding = 1,
             }
           },
         },
