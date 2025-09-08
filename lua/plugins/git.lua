@@ -47,10 +47,6 @@ return {
   {
     "tpope/vim-fugitive",
     cmd = { "Git", "Gstatus", "Gblame", "Gpush", "Gpull" },
-    keys = {
-      { "<leader>gs", "<cmd>Git<cr>", desc = "Git 状态" },
-      { "<leader>gb", "<cmd>Gblame<cr>", desc = "Git blame" },
-    },
   },
 
   -- Lazygit

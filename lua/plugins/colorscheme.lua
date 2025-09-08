@@ -39,6 +39,11 @@ return {
           fg = colors.palette.fg_dark,     -- 标志前景色
           bg = colors.palette.bg_main,     -- 与主背景一致
         },
+        -- 窗口分界线
+        WinSeparator = {
+          fg = colors.semantic.separator,  -- 使用统一的分隔符颜色
+          bg = "NONE",                     -- 透明背景
+        },
         -- 折叠列
         FoldColumn = {
           fg = colors.palette.fg_dim,
