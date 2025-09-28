@@ -27,7 +27,7 @@ require("lazy").setup("plugins", {
     ssl_verify = false, -- Disable SSL verification
   },
   install = {
-    colorscheme = { "nordfox" },
+    colorscheme = { "ayu" },
   },
   checker = {
     enabled = true,

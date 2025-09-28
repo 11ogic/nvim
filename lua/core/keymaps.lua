@@ -109,8 +109,17 @@ local M = {
 local function setup_lsp_keymaps(bufnr)
   local opts = { noremap = true, silent = true, buffer = bufnr }
 
-  -- LSP导航
-  vim.keymap.set("n", "gd", vim.lsp.buf.definition, vim.tbl_extend("force", opts, { desc = "跳转到定义" }))
+  -- LSP导航 - 确保覆盖任何全局映射
+  vim.keymap.set("n", "gd", function()
+    -- 检查是否有 LSP 客户端附加
+    local clients = vim.lsp.get_clients({ bufnr = bufnr })
+    if #clients > 0 then
+      vim.lsp.buf.definition()
+    else
+      -- 如果没有 LSP 客户端，显示消息
+      vim.notify("没有 LSP 客户端附加到当前缓冲区", vim.log.levels.WARN)
+    end
+  end, vim.tbl_extend("force", opts, { desc = "跳转到定义" }))
   vim.keymap.set("n", "gr", vim.lsp.buf.references, vim.tbl_extend("force", opts, { desc = "查找引用" }))
   vim.keymap.set("n", "gD", vim.lsp.buf.declaration, vim.tbl_extend("force", opts, { desc = "跳转到声明" }))
   vim.keymap.set("n", "gi", vim.lsp.buf.implementation, vim.tbl_extend("force", opts, { desc = "跳转到实现" }))
