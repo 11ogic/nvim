@@ -21,7 +21,7 @@ function M.setup()
 
       -- Python
       "pyright",
-      "ruff_lsp", -- Python linter/formatter
+      "ruff", -- Python linter/formatter
 
       -- JavaScript/TypeScript
       "ts_ls",

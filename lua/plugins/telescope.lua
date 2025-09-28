@@ -30,6 +30,7 @@ return {
             "build",
             ".git",
             "__pycache__",
+            ".DS_Store"
           },
           hidden = false, -- show hidden files
           follow = false, -- follow symlinks
@@ -57,3 +58,4 @@ return {
     end,
   },
 }
+

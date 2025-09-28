@@ -7,9 +7,6 @@ function M.setup(lspconfig, capabilities, on_attach)
     on_attach = function(client, bufnr)
       -- 调用基础的 on_attach
       on_attach(client, bufnr)
-
-      -- Go 特定的调试信息
-      vim.notify("gopls LSP 已附加到缓冲区 " .. bufnr, vim.log.levels.INFO)
     end,
     settings = {
       gopls = {

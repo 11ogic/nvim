@@ -41,9 +41,9 @@ function M.setup(lspconfig, capabilities, on_attach)
   })
 
   -- Ruff (快速的 Python linter 和 formatter) - 可选
-  -- 只有在安装了 ruff_lsp 时才启用
-  if vim.fn.executable("ruff-lsp") == 1 then
-    lspconfig.ruff_lsp.setup({
+  -- 只有在安装了 ruff 时才启用
+  if vim.fn.executable("ruff") == 1 then
+    lspconfig.ruff.setup({
       capabilities = capabilities,
       on_attach = function(client, bufnr)
         -- 禁用 hover，让 Pyright 处理
@@ -69,7 +69,7 @@ function M.format_python_file()
   local pyright_client = nil
 
   for _, client in ipairs(clients) do
-    if client.name == "ruff_lsp" then
+    if client.name == "ruff" then
       ruff_client = client
     elseif client.name == "black" or client.name == "null-ls" then
       black_client = client
