@@ -28,7 +28,7 @@ function M.setup(lspconfig, capabilities, on_attach)
         },
         suggest = {
           autoImports = true,
-          completeFunctionCalls = true,
+          completeFunctionCalls = false,
         },
         inlayHints = {
           includeInlayParameterNameHints = "all",
@@ -46,7 +46,7 @@ function M.setup(lspconfig, capabilities, on_attach)
         },
         suggest = {
           autoImports = true,
-          completeFunctionCalls = true,
+          completeFunctionCalls = false,
         },
         inlayHints = {
           includeInlayParameterNameHints = "all",

@@ -58,7 +58,7 @@ function M.setup(lspconfig, capabilities, on_attach)
         },
         -- 补全设置
         completion = {
-          callSnippet = "Replace",    -- 函数调用片段
+          callSnippet = "Disable",    -- 禁用函数调用片段
           keywordSnippet = "Replace", -- 关键字片段
           displayContext = 1,         -- 显示上下文
         },

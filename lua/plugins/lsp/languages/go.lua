@@ -24,7 +24,7 @@ function M.setup(lspconfig, capabilities, on_attach)
         gofumpt = true,
         -- 代码补全设置
         completeUnimported = true,
-        usePlaceholders = true,
+        usePlaceholders = false, -- 禁用参数占位符
         -- 导入设置
         local_prefix = "",
         -- 实验性功能

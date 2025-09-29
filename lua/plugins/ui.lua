@@ -19,5 +19,5 @@ return {
   require("plugins.ui.enhancements")[2], -- indent-blankline
 
   -- 启动屏幕
-  require("plugins.ui.dashboard"),
+  -- require("plugins.ui.dashboard"),
 }
