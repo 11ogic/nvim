@@ -28,7 +28,7 @@ function M.setup()
       "eslint",
 
       -- Vue.js
-      "volar",
+      "vue_ls",
 
       -- Go
       "gopls",

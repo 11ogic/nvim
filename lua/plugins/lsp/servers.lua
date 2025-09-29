@@ -1,8 +1,7 @@
--- LSP 服务器配置 - 使用语言模块
+-- LSP 服务器配置 - 使用新的 vim.lsp.config API
 local M = {}
 
 function M.setup()
-  local lspconfig = require("lspconfig")
   local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
   -- 设置按键映射函数 - 键映射已移至 lua/core/keymaps.lua 文件中统一管理
@@ -25,7 +24,7 @@ function M.setup()
   -- 设置各语言的 LSP
   for name, lang_module in pairs(languages) do
     if lang_module.setup then
-      lang_module.setup(lspconfig, capabilities, on_attach)
+      lang_module.setup(capabilities, on_attach)
     end
   end
 

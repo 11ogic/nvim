@@ -5,8 +5,8 @@ return {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
-      { "mason-org/mason.nvim",           version = "^1.0.0" },
-      { "mason-org/mason-lspconfig.nvim", version = "^1.0.0" },
+      "mason-org/mason.nvim",
+      "mason-org/mason-lspconfig.nvim",
       "hrsh7th/nvim-cmp",
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-buffer",

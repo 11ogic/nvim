@@ -1,9 +1,9 @@
 -- 基础语言 LSP 配置（HTML, CSS, JSON 等）
 local M = {}
 
-function M.setup(lspconfig, capabilities, on_attach)
+function M.setup(capabilities, on_attach)
   -- JSON Language Server
-  lspconfig.jsonls.setup({
+  vim.lsp.config("jsonls", {
     capabilities = capabilities,
     on_attach = on_attach,
     settings = {
@@ -27,7 +27,7 @@ function M.setup(lspconfig, capabilities, on_attach)
   })
 
   -- HTML Language Server
-  lspconfig.html.setup({
+  vim.lsp.config("html", {
     capabilities = capabilities,
     on_attach = on_attach,
     settings = {
@@ -50,7 +50,7 @@ function M.setup(lspconfig, capabilities, on_attach)
   })
 
   -- CSS Language Server
-  lspconfig.cssls.setup({
+  vim.lsp.config("cssls", {
     capabilities = capabilities,
     on_attach = on_attach,
     settings = {
@@ -96,7 +96,7 @@ function M.setup(lspconfig, capabilities, on_attach)
 
   -- YAML Language Server (可选)
   if vim.fn.executable("yaml-language-server") == 1 then
-    lspconfig.yamlls.setup({
+    vim.lsp.config("yamlls", {
       capabilities = capabilities,
       on_attach = on_attach,
       settings = {
@@ -118,7 +118,7 @@ function M.setup(lspconfig, capabilities, on_attach)
 
   -- Markdown Language Server (可选)
   if vim.fn.executable("marksman") == 1 then
-    lspconfig.marksman.setup({
+    vim.lsp.config("marksman", {
       capabilities = capabilities,
       on_attach = on_attach,
       filetypes = { "markdown", "md" },

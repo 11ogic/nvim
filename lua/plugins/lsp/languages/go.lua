@@ -1,8 +1,8 @@
 -- Go LSP 配置
 local M = {}
 
-function M.setup(lspconfig, capabilities, on_attach)
-  lspconfig.gopls.setup({
+function M.setup(capabilities, on_attach)
+  vim.lsp.config("gopls", {
     capabilities = capabilities,
     on_attach = function(client, bufnr)
       -- 调用基础的 on_attach
@@ -58,20 +58,14 @@ function M.setup(lspconfig, capabilities, on_attach)
       },
     },
     filetypes = { "go", "gomod", "gowork", "gotmpl" },
-    root_dir = function(fname)
-      -- 优先查找 go.work，然后是 go.mod，最后是 .git
-      local root = lspconfig.util.root_pattern("go.work")(fname)
-          or lspconfig.util.root_pattern("go.mod")(fname)
-          or lspconfig.util.root_pattern(".git")(fname)
-
+    root_markers = { "go.work", "go.mod", ".git" },
+    on_init = function(client, result)
+      local root = result.root_path or result.rootPath
       if root then
         vim.notify("Go 项目根目录: " .. root, vim.log.levels.INFO)
-        return root
+      else
+        vim.notify("未找到 Go 项目根目录，使用文件目录", vim.log.levels.WARN)
       end
-
-      -- 如果没找到，使用文件所在目录
-      vim.notify("未找到 Go 项目根目录，使用文件目录", vim.log.levels.WARN)
-      return vim.fn.fnamemodify(fname, ":p:h")
     end,
   })
 end

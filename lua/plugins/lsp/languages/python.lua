@@ -1,9 +1,9 @@
 -- Python LSP 配置
 local M = {}
 
-function M.setup(lspconfig, capabilities, on_attach)
+function M.setup(capabilities, on_attach)
   -- Pyright (推荐的 Python LSP)
-  lspconfig.pyright.setup({
+  vim.lsp.config("pyright", {
     capabilities = capabilities,
     on_attach = on_attach,
     settings = {
@@ -29,7 +29,7 @@ function M.setup(lspconfig, capabilities, on_attach)
       },
     },
     filetypes = { "python" },
-    root_dir = lspconfig.util.root_pattern(
+    root_markers = {
       "pyproject.toml",
       "setup.py",
       "setup.cfg",
@@ -37,13 +37,13 @@ function M.setup(lspconfig, capabilities, on_attach)
       "Pipfile",
       "pyrightconfig.json",
       ".git"
-    ),
+    },
   })
 
   -- Ruff (快速的 Python linter 和 formatter) - 可选
   -- 只有在安装了 ruff 时才启用
   if vim.fn.executable("ruff") == 1 then
-    lspconfig.ruff.setup({
+    vim.lsp.config("ruff", {
       capabilities = capabilities,
       on_attach = function(client, bufnr)
         -- 禁用 hover，让 Pyright 处理

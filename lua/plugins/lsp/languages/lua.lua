@@ -1,8 +1,8 @@
 -- Lua LSP 配置
 local M = {}
 
-function M.setup(lspconfig, capabilities, on_attach)
-  lspconfig.lua_ls.setup({
+function M.setup(capabilities, on_attach)
+  vim.lsp.config("lua_ls", {
     capabilities = capabilities,
     on_attach = on_attach,
     settings = {
@@ -72,8 +72,8 @@ function M.setup(lspconfig, capabilities, on_attach)
       },
     },
     filetypes = { "lua" },
-    root_dir = lspconfig.util.root_pattern(".luarc.json", ".luarc.jsonc", ".luacheckrc", ".stylua.toml", "stylua.toml",
-      "selene.toml", "selene.yml", ".git"),
+    root_markers = { ".luarc.json", ".luarc.jsonc", ".luacheckrc", ".stylua.toml", "stylua.toml",
+      "selene.toml", "selene.yml", ".git" },
   })
 end
 

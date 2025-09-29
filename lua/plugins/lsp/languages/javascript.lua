@@ -1,9 +1,9 @@
 -- JavaScript/TypeScript LSP 配置
 local M = {}
 
-function M.setup(lspconfig, capabilities, on_attach)
+function M.setup(capabilities, on_attach)
   -- TypeScript Language Server
-  lspconfig.ts_ls.setup({
+  vim.lsp.config("ts_ls", {
     capabilities = capabilities,
     on_attach = on_attach,
     -- 确保读取 tsconfig.json
@@ -60,11 +60,11 @@ function M.setup(lspconfig, capabilities, on_attach)
       },
     },
     filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
-    root_dir = lspconfig.util.root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git"),
+    root_markers = { "package.json", "tsconfig.json", "jsconfig.json", ".git" },
   })
 
   -- ESLint
-  lspconfig.eslint.setup({
+  vim.lsp.config("eslint", {
     capabilities = capabilities,
     on_attach = function(client, bufnr)
       on_attach(client, bufnr)
