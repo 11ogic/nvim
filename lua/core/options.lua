@@ -52,4 +52,7 @@ opt.splitright = true
 opt.splitbelow = true
 
 -- 系统剪贴板
-opt.clipboard:append("unnamedplus") 
+opt.clipboard:append("unnamedplus")
+
+-- 不显示文件写入消息
+vim.opt.shortmess:append("W")
