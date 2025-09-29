@@ -30,24 +30,29 @@ local M = {
   { "n", "<leader>nh", ":nohl<CR>", { desc = "清除搜索高亮", noremap = true, silent = true } },
 
   -- 窗口管理
-  { "n", "<leader>q", ":close<CR>", { desc = "关闭当前窗口", noremap = true, silent = true } },
-  { "n", "<leader>qq", ":qall<CR>", { desc = "关闭所有窗口", noremap = true, silent = true } },
-  { "n", "<leader>w", ":w<CR>", { desc = "保存文件", noremap = true, silent = true } },
+  { "n", "<leader>x", ":close<CR>", { desc = "关闭当前窗口", noremap = true, silent = true } },
+  { "n", "<leader>Q", ":qall<CR>", { desc = "关闭所有窗口", noremap = true, silent = true } },
   { "n", "<leader>W", ":wall<CR>", { desc = "保存所有文件", noremap = true, silent = true } },
   { "n", "<leader>sv", ":vsplit<CR>", { desc = "垂直分割窗口", noremap = true, silent = true } },
   { "n", "<leader>sh", ":split<CR>", { desc = "水平分割窗口", noremap = true, silent = true } },
   { "n", "<leader>se", "<C-w>=", { desc = "等分窗口", noremap = true, silent = true } },
 
+  -- 保存文件
+  { "n", "<leader>w", ":w<CR>", { desc = "保存文件", noremap = true, silent = true } },
+  { "n", "<C-s>", ":w<CR>", { desc = "保存文件", noremap = true, silent = true } },
+  { "i", "<C-s>", "<Esc>:w<CR>a", { desc = "保存文件", noremap = true, silent = true } },
+
   -- ========== 缓冲区和标签页管理 ==========
   -- 缓冲区管理
-  { "n", "<leader>bd", ":bd<CR>", { desc = "删除当前缓冲区", noremap = true, silent = true } },
-  { "n", "<leader>bD", ":!bd<CR>", { desc = "强制删除当前缓冲区", noremap = true, silent = true } },
-  { "n", "<leader>bn", ":bnext<CR>", { desc = "下一个缓冲区", noremap = true, silent = true } },
-  { "n", "<leader>bp", ":bprevious<CR>", { desc = "上一个缓冲区", noremap = true, silent = true } },
+  { "n", "<leader>q", ":bd<CR>", { desc = "删除当前缓冲区", noremap = true, silent = true } },
+  { "n", "<leader>qq", ":!bd<CR>", { desc = "强制删除当前缓冲区", noremap = true, silent = true } },
+  { "n", "gt", "<cmd>bnext<cr>", { desc = "下一个缓冲区", noremap = true, silent = true } },
+  { "n", "gT", "<cmd>bprevious<cr>", { desc = "上一个缓冲区", noremap = true, silent = true } },
 
-  -- 标签页
-  { "n", "gT", "<cmd>bprevious<cr>", { desc = "上一个标签页", noremap = true, silent = true } },
-  { "n", "gt", "<cmd>bnext<cr>", { desc = "下一个标签页", noremap = true, silent = true } },
+  -- 真正的标签页操作（偶尔使用）
+  { "n", "<leader>tn", ":tabnew<CR>", { desc = "新建标签页", noremap = true, silent = true } },
+  { "n", "<leader>tc", ":tabclose<CR>", { desc = "关闭标签页", noremap = true, silent = true } },
+  { "n", "<leader>to", ":tabonly<CR>", { desc = "只保留当前标签页", noremap = true, silent = true } },
 
   -- ========== 文件浏览器 (nvim-tree) ==========
   { "n", "<leader>1", ":NvimTreeToggle<CR>", { desc = "切换文件浏览器", noremap = true, silent = true } },
