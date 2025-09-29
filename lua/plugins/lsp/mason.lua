@@ -13,7 +13,7 @@ function M.setup()
     }
   })
 
-  -- 设置Mason-lspconfig
+  -- 设置Mason-lspconfig (LSP 服务器)
   require("mason-lspconfig").setup({
     ensure_installed = {
       -- Lua
@@ -42,6 +42,11 @@ function M.setup()
     },
     automatic_installation = true,
   })
+
+  -- 注意：格式化工具需要手动安装
+  -- 可以通过以下方式安装：
+  -- :MasonInstall prettier stylua gofumpt goimports shfmt
+  -- 或者使用系统包管理器安装
 end
 
 return M

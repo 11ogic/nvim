@@ -318,17 +318,7 @@ return {
           lsp_doc_border = true,        -- add a border to hover docs and signature help
         },
       })
-      -- 诊断浮动窗口配置
-      vim.diagnostic.config({
-        virtual_text = false,
-        float = {
-          border = "rounded",
-          max_width = 70,
-          max_height = 30,
-          focusable = true,
-          close_events = { "BufLeave", "CursorMoved", "InsertEnter" },
-        },
-      })
+      -- 诊断配置已移至 lua/plugins/lsp/utils.lua 统一管理
     end
   },
 

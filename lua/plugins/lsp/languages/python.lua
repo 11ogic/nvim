@@ -63,7 +63,7 @@ end
 
 -- Python 特定的格式化函数
 function M.format_python_file()
-  local clients = vim.lsp.get_active_clients({ bufnr = 0 })
+  local clients = vim.lsp.get_clients({ bufnr = 0 })
   local ruff_client = nil
   local black_client = nil
   local pyright_client = nil
@@ -71,7 +71,7 @@ function M.format_python_file()
   for _, client in ipairs(clients) do
     if client.name == "ruff" then
       ruff_client = client
-    elseif client.name == "black" or client.name == "null-ls" then
+    elseif client.name == "black" then
       black_client = client
     elseif client.name == "pyright" then
       pyright_client = client

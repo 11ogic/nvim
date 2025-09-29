@@ -78,7 +78,7 @@ end
 
 -- Go 特定的格式化函数
 function M.format_go_file()
-  local clients = vim.lsp.get_active_clients({ bufnr = 0 })
+  local clients = vim.lsp.get_clients({ bufnr = 0 })
   local gopls_client = nil
 
   for _, client in ipairs(clients) do

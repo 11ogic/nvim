@@ -49,6 +49,51 @@ return {
           fg = colors.palette.fg_dim,
           bg = colors.palette.bg_main,
         },
+        
+        -- ========== 诊断浮窗颜色覆盖 ==========
+        -- 诊断浮窗背景
+        NormalFloat = {
+          fg = colors.palette.fg_main,
+          bg = colors.diagnostic.float_bg,
+        },
+        -- 诊断浮窗边框
+        FloatBorder = {
+          fg = colors.diagnostic.float_border,
+          bg = colors.diagnostic.float_bg,
+        },
+        -- 诊断错误颜色
+        DiagnosticError = {
+          fg = colors.diagnostic.error_text,
+        },
+        -- 诊断警告颜色
+        DiagnosticWarn = {
+          fg = colors.diagnostic.warning_text,
+        },
+        -- 诊断信息颜色
+        DiagnosticInfo = {
+          fg = colors.diagnostic.info_text,
+        },
+        -- 诊断提示颜色
+        DiagnosticHint = {
+          fg = colors.diagnostic.hint_text,
+        },
+        -- 诊断符号颜色
+        DiagnosticSignError = {
+          fg = colors.diagnostic.error_sign,
+          bg = colors.palette.bg_main,
+        },
+        DiagnosticSignWarn = {
+          fg = colors.diagnostic.warning_sign,
+          bg = colors.palette.bg_main,
+        },
+        DiagnosticSignInfo = {
+          fg = colors.diagnostic.info_sign,
+          bg = colors.palette.bg_main,
+        },
+        DiagnosticSignHint = {
+          fg = colors.diagnostic.hint_sign,
+          bg = colors.palette.bg_main,
+        },
       },
     })
     vim.cmd("colorscheme ayu")

@@ -128,12 +128,12 @@ end
 
 -- 基础语言的格式化函数
 function M.format_basic_file()
-  local clients = vim.lsp.get_active_clients({ bufnr = 0 })
+  local clients = vim.lsp.get_clients({ bufnr = 0 })
   local prettier_client = nil
   local lsp_client = nil
 
   for _, client in ipairs(clients) do
-    if client.name == "prettier" or client.name == "null-ls" then
+    if client.name == "prettier" then
       prettier_client = client
     elseif client.server_capabilities.documentFormattingProvider then
       lsp_client = client

@@ -79,12 +79,12 @@ end
 
 -- Lua 特定的格式化函数
 function M.format_lua_file()
-  local clients = vim.lsp.get_active_clients({ bufnr = 0 })
+  local clients = vim.lsp.get_clients({ bufnr = 0 })
   local stylua_client = nil
   local lua_ls_client = nil
 
   for _, client in ipairs(clients) do
-    if client.name == "stylua" or client.name == "null-ls" then
+    if client.name == "stylua" then
       stylua_client = client
     elseif client.name == "lua_ls" then
       lua_ls_client = client
@@ -143,7 +143,7 @@ function M.setup_keymaps(bufnr)
 
   -- Lua 特定的快捷键
   vim.keymap.set("n", "<leader>lr", "<cmd>luafile %<cr>", vim.tbl_extend("force", opts, { desc = "运行当前 Lua 文件" }))
-  vim.keymap.set("n", "<leader>ll", "<cmd>lua print(vim.inspect(vim.lsp.get_active_clients()))<cr>",
+  vim.keymap.set("n", "<leader>ll", "<cmd>lua print(vim.inspect(vim.lsp.get_clients()))<cr>",
     vim.tbl_extend("force", opts, { desc = "查看 LSP 客户端" }))
 end
 

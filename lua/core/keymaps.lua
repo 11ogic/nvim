@@ -99,6 +99,12 @@ local M = {
   { "i", "<C-j>", 'copilot#Next()', { expr = true, silent = true, desc = "下一个Copilot建议" } },
   { "i", "<C-k>", 'copilot#Previous()', { expr = true, silent = true, desc = "上一个Copilot建议" } },
 
+  -- ========== 代码格式化 ==========
+  { "n", "<c-l>", function()
+    require("conform").format({ async = true, lsp_fallback = true })
+  end, { desc = "格式化代码", noremap = true, silent = true } },
+  { "n", "<leader>fl", "<cmd>EslintFixAll<cr>", { desc = "格式化 ESLint 代码", noremap = true, silent = true } },
+
   -- ========== Vue 开发 ==========
   { "n", "<leader>vf", function() vim.lsp.buf.format({ async = false }) end, { desc = "格式化 Vue 文件", noremap = true, silent = true } },
   { "n", "<leader>vr", "<cmd>Telescope lsp_references<cr>", { desc = "查找 Vue 组件引用", noremap = true, silent = true } },
@@ -127,7 +133,7 @@ local function setup_lsp_keymaps(bufnr)
   vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, vim.tbl_extend("force", opts, { desc = "显示签名帮助" }))
 
   -- 诊断
-  vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, vim.tbl_extend("force", opts, { desc = "显示诊断信息" }))
+  vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, vim.tbl_extend("force", opts, { desc = "显示诊断信息" }))
   vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, vim.tbl_extend("force", opts, { desc = "上一个诊断" }))
   vim.keymap.set("n", "]d", vim.diagnostic.goto_next, vim.tbl_extend("force", opts, { desc = "下一个诊断" }))
 

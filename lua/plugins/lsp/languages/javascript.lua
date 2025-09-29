@@ -70,10 +70,10 @@ function M.setup(lspconfig, capabilities, on_attach)
       on_attach(client, bufnr)
 
       -- 自动修复 ESLint 错误
-      vim.api.nvim_create_autocmd("BufWritePre", {
-        buffer = bufnr,
-        command = "EslintFixAll",
-      })
+      -- vim.api.nvim_create_autocmd("BufWritePre", {
+      --   buffer = bufnr,
+      --   command = "EslintFixAll",
+      -- })
     end,
     settings = {
       workingDirectory = { mode = "auto" },
@@ -95,13 +95,13 @@ end
 
 -- JavaScript/TypeScript 特定的格式化函数
 function M.format_js_file()
-  local clients = vim.lsp.get_active_clients({ bufnr = 0 })
+  local clients = vim.lsp.get_clients({ bufnr = 0 })
   local prettier_client = nil
   local eslint_client = nil
   local ts_client = nil
 
   for _, client in ipairs(clients) do
-    if client.name == "prettier" or client.name == "null-ls" then
+    if client.name == "prettier" then
       prettier_client = client
     elseif client.name == "eslint" then
       eslint_client = client

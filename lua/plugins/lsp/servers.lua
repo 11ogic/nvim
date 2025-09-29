@@ -29,13 +29,6 @@ function M.setup()
     end
   end
 
-  -- 设置各语言的自动命令
-  for name, lang_module in pairs(languages) do
-    if lang_module.setup_autocmds then
-      lang_module.setup_autocmds()
-    end
-  end
-
   -- 设置语言特定的快捷键（如果需要）
   vim.api.nvim_create_autocmd("LspAttach", {
     group = vim.api.nvim_create_augroup("LspLanguageKeymaps", { clear = true }),
