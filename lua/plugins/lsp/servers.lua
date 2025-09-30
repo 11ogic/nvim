@@ -15,6 +15,7 @@ function M.setup()
   -- 加载各语言模块
   local languages = {
     javascript = require("plugins.lsp.languages.javascript"),
+    vue = require("plugins.lsp.languages.vue"),
     go = require("plugins.lsp.languages.go"),
     lua = require("plugins.lsp.languages.lua"),
     python = require("plugins.lsp.languages.python"),

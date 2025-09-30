@@ -6,20 +6,6 @@ function M.setup(capabilities, on_attach)
   vim.lsp.config("ts_ls", {
     capabilities = capabilities,
     on_attach = on_attach,
-    -- 确保读取 tsconfig.json
-    before_init = function(_, config)
-      -- 查找 tsconfig.json 或 jsconfig.json
-      local tsconfig = vim.fn.findfile("tsconfig.json", config.root_dir .. ";")
-      local jsconfig = vim.fn.findfile("jsconfig.json", config.root_dir .. ";")
-
-      if tsconfig ~= "" then
-        config.init_options = config.init_options or {}
-        config.init_options.tsconfig = tsconfig
-      elseif jsconfig ~= "" then
-        config.init_options = config.init_options or {}
-        config.init_options.tsconfig = jsconfig
-      end
-    end,
     settings = {
       typescript = {
         preferences = {
@@ -59,8 +45,13 @@ function M.setup(capabilities, on_attach)
         },
       },
     },
-    filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+    filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
     root_markers = { "package.json", "tsconfig.json", "jsconfig.json", ".git" },
+    init_options = {
+      plugins = {
+        { name = "@vue/typescript-plugin", location = require("plugins.lsp.languages.vue").vue_language_server_path, languages = { "vue" } },
+      },
+    },
   })
 
   -- ESLint
@@ -89,7 +80,7 @@ function M.setup(capabilities, on_attach)
         }
       }
     },
-    filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+    filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
   })
 end
 
