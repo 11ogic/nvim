@@ -32,6 +32,9 @@ opt.backup = false
 -- 光标行
 opt.cursorline = true
 
+-- 光标形状设置
+opt.guicursor = "n-v-c:block,i-ci:ver25,r-cr:hor20"
+
 -- 外观
 opt.scrolloff = 8
 opt.sidescrolloff = 8

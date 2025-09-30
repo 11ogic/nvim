@@ -12,12 +12,21 @@ function M.setup()
       end,
     },
     completion = {
-      border = "rounded",
-      winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None",
+      completeopt = "menu,menuone,noinsert",
+    },
+    window = {
+      completion = cmp.config.window.bordered({
+        border = "rounded",
+        winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:Visual,Search:None",
+      }),
+      documentation = cmp.config.window.bordered({
+        border = "rounded",
+        focusable = true
+      }),
     },
     mapping = cmp.mapping.preset.insert({
-      ["<C-e>"] = cmp.mapping.abort(), -- 关闭补全窗口
-      ["<CR>"] = cmp.mapping.confirm({ select = false }), -- 确认选择
+      ["<C-e>"] = cmp.mapping.abort(),                   -- 关闭补全窗口
+      ["<CR>"] = cmp.mapping.confirm({ select = true }), -- 确认选择
     }),
     sources = cmp.config.sources({
       { name = "nvim_lsp" },

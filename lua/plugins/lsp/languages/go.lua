@@ -59,14 +59,6 @@ function M.setup(capabilities, on_attach)
     },
     filetypes = { "go", "gomod", "gowork", "gotmpl" },
     root_markers = { "go.work", "go.mod", ".git" },
-    on_init = function(client, result)
-      local root = result.root_path or result.rootPath
-      if root then
-        vim.notify("Go 项目根目录: " .. root, vim.log.levels.INFO)
-      else
-        vim.notify("未找到 Go 项目根目录，使用文件目录", vim.log.levels.WARN)
-      end
-    end,
   })
 end
 
