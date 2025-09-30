@@ -97,11 +97,26 @@ return {
   -- 增强会话管理
   {
     "folke/persistence.nvim",
-    event = "BufReadPre",
+    event = "VimEnter",
     config = function()
       require("persistence").setup({
         dir = vim.fn.expand(vim.fn.stdpath("state") .. "/sessions/"),
         options = { "buffers", "curdir", "tabpages", "winsize" },
+      })
+
+      -- 仅在无参数启动 nvim 时自动恢复上次会话
+      vim.api.nvim_create_autocmd("VimEnter", {
+        group = vim.api.nvim_create_augroup("RestoreSession", { clear = true }),
+        callback = function()
+          -- 检查是否是无参数启动
+          if vim.fn.argc() == 0 then
+            -- 延迟执行，确保其他插件已加载
+            vim.schedule(function()
+              require("persistence").load()
+            end)
+          end
+        end,
+        nested = true,
       })
 
       -- 键盘映射已移至 lua/core/keymaps.lua 文件中统一管理
