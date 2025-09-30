@@ -210,12 +210,30 @@ local function setup_lsp_keymaps(bufnr)
     vim.diagnostic.open_float,
     vim.tbl_extend("force", opts, { desc = "显示诊断信息" })
   )
+  vim.keymap.set(
+    "n",
+    "<leader>E",
+    function()
+      vim.diagnostic.open_float({
+        focusable = true,
+        focus = true,
+        border = "rounded",
+        max_width = 70,
+        max_height = 30,
+      })
+    end,
+    vim.tbl_extend("force", opts, { desc = "显示诊断信息" })
+  )
   vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, vim.tbl_extend("force", opts, { desc = "上一个诊断" }))
   vim.keymap.set("n", "]d", vim.diagnostic.goto_next, vim.tbl_extend("force", opts, { desc = "下一个诊断" }))
 
   -- 重命名和代码操作
   vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, vim.tbl_extend("force", opts, { desc = "重命名符号" }))
   vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, vim.tbl_extend("force", opts, { desc = "代码操作" }))
+
+  -- 打开诊断列表（Telescope）
+  vim.keymap.set("n", "<leader>de", "<cmd>Telescope diagnostics bufnr=0<CR>", { desc = "当前文件诊断列表" })
+  vim.keymap.set("n", "<leader>dw", "<cmd>Telescope diagnostics<CR>", { desc = "工作区诊断列表" })
 
   -- 格式化
   vim.keymap.set("n", "<leader>F", function()

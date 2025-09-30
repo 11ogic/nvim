@@ -28,15 +28,11 @@ function M.setup()
         [vim.diagnostic.severity.INFO] = "▶",
       },
     },
-    virtual_text = false,     -- 禁用虚拟文本，使用下划线代替
-    underline = true,         -- 启用下划线
+    virtual_text = false,     -- 虚拟文本
     update_in_insert = true, -- 插入模式下更新诊断
     severity_sort = true,     -- 按严重程度排序
     float = {
       border = "rounded",
-      max_width = 70,
-      max_height = 30,
-      focusable = true,
       close_events = { "BufLeave", "CursorMoved", "InsertEnter" },
       -- 使用统一的颜色配置
       style = "minimal",
