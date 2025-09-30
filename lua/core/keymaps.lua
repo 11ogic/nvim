@@ -163,18 +163,6 @@ local M = {
     end,
     { desc = "格式化 Vue 文件", noremap = true, silent = true },
   },
-  {
-    "n",
-    "<leader>vr",
-    "<cmd>Telescope lsp_references<cr>",
-    { desc = "查找 Vue 组件引用", noremap = true, silent = true },
-  },
-  {
-    "n",
-    "<leader>vd",
-    "<cmd>Telescope lsp_definitions<cr>",
-    { desc = "跳转到 Vue 组件定义", noremap = true, silent = true },
-  },
 }
 
 -- LSP 专用键映射函数
@@ -187,9 +175,6 @@ local function setup_lsp_keymaps(bufnr)
     local clients = vim.lsp.get_clients({ bufnr = bufnr })
     if #clients > 0 then
       vim.lsp.buf.definition()
-    else
-      -- 如果没有 LSP 客户端，显示消息
-      vim.notify("没有 LSP 客户端附加到当前缓冲区", vim.log.levels.WARN)
     end
   end, vim.tbl_extend("force", opts, { desc = "跳转到定义" }))
   vim.keymap.set("n", "gr", vim.lsp.buf.references, vim.tbl_extend("force", opts, { desc = "查找引用" }))
@@ -208,20 +193,6 @@ local function setup_lsp_keymaps(bufnr)
     "n",
     "<leader>e",
     vim.diagnostic.open_float,
-    vim.tbl_extend("force", opts, { desc = "显示诊断信息" })
-  )
-  vim.keymap.set(
-    "n",
-    "<leader>E",
-    function()
-      vim.diagnostic.open_float({
-        focusable = true,
-        focus = true,
-        border = "rounded",
-        max_width = 70,
-        max_height = 30,
-      })
-    end,
     vim.tbl_extend("force", opts, { desc = "显示诊断信息" })
   )
   vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, vim.tbl_extend("force", opts, { desc = "上一个诊断" }))
@@ -281,13 +252,14 @@ local function setup_gitsigns_keymaps(bufnr)
   map("v", "<leader>hr", function()
     gs.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
   end, { desc = "重置选定变更" })
-  map("n", "<leader>hS", gs.stage_buffer, { desc = "暂存所有变更" })
+  -- map("n", "<leader>hS", gs.stage_buffer, { desc = "暂存所有变更" })
   map("n", "<leader>hu", gs.undo_stage_hunk, { desc = "撤销暂存变更" })
-  map("n", "<leader>hR", gs.reset_buffer, { desc = "重置所有变更" })
+  -- map("n", "<leader>hR", gs.reset_buffer, { desc = "重置所有变更" })
   map("n", "<leader>hp", gs.preview_hunk, { desc = "预览变更" })
   map("n", "<leader>hb", function()
     gs.blame_line({ full = true })
   end, { desc = "显示 Git blame" })
+  map("n", "<leader>hB", "<cmd>Git blame<CR>", { desc = "完整 Git blame" })
   map("n", "<leader>tb", gs.toggle_current_line_blame, { desc = "切换行 blame" })
   map("n", "<leader>hd", gs.diffthis, { desc = "显示 Git diff" })
   map("n", "<leader>hD", function()
