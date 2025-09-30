@@ -55,7 +55,7 @@ local M = {
   { "n", "<leader>to", ":tabonly<CR>", { desc = "只保留当前标签页", noremap = true, silent = true } },
 
   -- ========== 文件浏览器 (nvim-tree) ==========
-  { "n", "<leader>1", ":NvimTreeToggle<CR>", { desc = "切换文件浏览器", noremap = true, silent = true } },
+  { "n", "<leader><space>", ":NvimTreeToggle<CR>", { desc = "切换文件浏览器", noremap = true, silent = true } },
 
   -- ========== 搜索和查找 (Telescope) ==========
   -- 基础搜索
@@ -137,7 +137,7 @@ local M = {
   -- ========== Git操作 ==========
   { "n", "<leader>gs", "<cmd>Git<cr>", { desc = "Git 状态", noremap = true, silent = true } },
   { "n", "<leader>gb", "<cmd>Gblame<cr>", { desc = "Git blame", noremap = true, silent = true } },
-  { "n", "<c-g>", ":LazyGit<CR>", { desc = "LazyGit", noremap = true, silent = true } },
+  { "n", "<c-g>", "<cmd>nohlsearch<cr><cmd>LazyGit<cr>", { desc = "LazyGit", noremap = true, silent = true } },
 
   -- ========== Copilot ==========
   { "i", "<C-j>", "copilot#Next()", { expr = true, silent = true, desc = "下一个Copilot建议" } },
@@ -286,16 +286,8 @@ local function setup_nvimtree_keymaps(bufnr)
     return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
   end
 
-  local function open_file_and_close()
-    local node = api.tree.get_node_under_cursor()
-    api.node.open.edit()
-    if node and node.type == "file" then
-      api.tree.close()
-    end
-  end
-
   vim.keymap.set("n", "<CR>", api.node.open.edit, opts("打开"))
-  vim.keymap.set("n", "l", open_file_and_close, opts("打开并关闭"))
+  vim.keymap.set("n", "l", api.node.open.edit, opts("打开"))
   vim.keymap.set("n", "<Tab>", api.node.open.edit, opts("打开"))
   vim.keymap.set("n", "h", api.node.navigate.parent_close, opts("关闭目录"))
   vim.keymap.set("n", "v", api.node.open.vertical, opts("垂直分割打开"))
@@ -315,6 +307,7 @@ local function setup_nvimtree_keymaps(bufnr)
   vim.keymap.set("n", "H", api.tree.toggle_hidden_filter, opts("切换隐藏文件"))
   vim.keymap.set("n", "R", api.tree.reload, opts("刷新"))
   vim.keymap.set("n", "?", api.tree.toggle_help, opts("帮助"))
+  vim.keymap.set("n", "<Esc>", api.tree.close, opts("关闭文件树"))
 end
 
 -- 应用基础键映射

@@ -9,26 +9,29 @@ function M.setup()
     pattern = "*",
     callback = function()
       -- 当跳转到新缓冲区时，自动关闭 location list 和 quickfix list
-      if vim.bo.buftype == "" then            -- 只在普通文件缓冲区中执行
+      if vim.bo.buftype == "" then  -- 只在普通文件缓冲区中执行
         vim.schedule(function()
-          vim.cmd("silent! lclose")           -- 关闭 location list
-          vim.cmd("silent! cclose")           -- 关闭 quickfix list
+          vim.cmd("silent! lclose") -- 关闭 location list
+          vim.cmd("silent! cclose") -- 关闭 quickfix list
         end)
       end
     end,
   })
 
-  -- 🎨 自定义诊断标识（使用新的 API）
+  -- 🎨 自定义诊断标识
   vim.diagnostic.config({
     signs = {
       text = {
-        [vim.diagnostic.severity.ERROR] = "●",
-        [vim.diagnostic.severity.WARN] = "●",
-        [vim.diagnostic.severity.HINT] = "●",
-        [vim.diagnostic.severity.INFO] = "●",
+        [vim.diagnostic.severity.ERROR] = "✗",
+        [vim.diagnostic.severity.WARN] = "▶",
+        [vim.diagnostic.severity.HINT] = "▶",
+        [vim.diagnostic.severity.INFO] = "▶",
       },
     },
-    virtual_text = false,     -- 禁用虚拟文本，避免与 UI 配置冲突
+    virtual_text = false,     -- 禁用虚拟文本，使用下划线代替
+    underline = true,         -- 启用下划线
+    update_in_insert = true, -- 插入模式下更新诊断
+    severity_sort = true,     -- 按严重程度排序
     float = {
       border = "rounded",
       max_width = 70,
@@ -40,6 +43,7 @@ function M.setup()
       header = "",
       prefix = "",
       suffix = "",
+      source = "always", -- 显示诊断来源
     },
   })
 
@@ -98,7 +102,6 @@ function M.setup()
       )
     )
   end)
-
 end
 
 return M
