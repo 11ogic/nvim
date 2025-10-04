@@ -26,11 +26,7 @@ function M.setup(capabilities, on_attach)
         },
         -- 工作区设置
         workspace = {
-          library = {
-            [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-            [vim.fn.stdpath("config") .. "/lua"] = true,
-            [vim.fn.stdpath("data") .. "/lazy"] = true, -- Lazy.nvim 插件目录
-          },
+          library = vim.api.nvim_get_runtime_file("", true),
           maxPreload = 100000,
           preloadFileSize = 10000,
           checkThirdParty = false, -- 不检查第三方库

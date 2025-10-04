@@ -5,6 +5,7 @@ function M.setup()
   local cmp = require("cmp")
   local luasnip = require("luasnip")
 
+  ---@diagnostic disable-next-line: redundant-parameter
   cmp.setup({
     snippet = {
       expand = function(args)
@@ -21,7 +22,6 @@ function M.setup()
       }),
       documentation = cmp.config.window.bordered({
         border = "rounded",
-        focusable = true
       }),
     },
     mapping = cmp.mapping.preset.insert({
