@@ -43,9 +43,13 @@ local M = {
   { "i", "<C-s>", "<Esc>:w<CR>a", { desc = "保存文件", noremap = true, silent = true } },
 
   -- ========== 缓冲区和标签页管理 ==========
-  -- 缓冲区管理
-  { "n", "<leader>q", ":bd<CR>", { desc = "删除当前缓冲区", noremap = true, silent = true } },
-  { "n", "<leader>qq", ":!bd<CR>", { desc = "强制删除当前缓冲区", noremap = true, silent = true } },
+  -- 缓冲区管理（使用 mini.bufremove 保留窗口布局）
+  { "n", "<leader>q", function()
+    require('mini.bufremove').delete(0, false)
+  end, { desc = "删除 buffer", noremap = true, silent = true } },
+  { "n", "<leader>qq", function()
+    require('mini.bufremove').delete(0, true)
+  end, { desc = "强制删除 buffer", noremap = true, silent = true } },
   { "n", "gt", "<cmd>bnext<cr>", { desc = "下一个缓冲区", noremap = true, silent = true } },
   { "n", "gT", "<cmd>bprevious<cr>", { desc = "上一个缓冲区", noremap = true, silent = true } },
 

@@ -1,4 +1,13 @@
 return {
+  -- Buffer 管理 - 智能删除 buffer（保留窗口）
+  {
+    "echasnovski/mini.bufremove",
+    event = "VeryLazy",
+    config = function()
+      require('mini.bufremove').setup()
+    end,
+  },
+
   -- 自动配对
   {
     "windwp/nvim-autopairs",
