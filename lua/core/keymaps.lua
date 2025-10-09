@@ -59,11 +59,11 @@ local M = {
   { "n", "<leader>to", ":tabonly<CR>", { desc = "只保留当前标签页", noremap = true, silent = true } },
 
   -- ========== 文件浏览器 (nvim-tree) ==========
-  { "n", "<leader><space>", ":NvimTreeToggle<CR>", { desc = "切换文件浏览器", noremap = true, silent = true } },
+  { "n", "<leader>o", ":NvimTreeToggle<CR>", { desc = "切换文件浏览器", noremap = true, silent = true } },
 
   -- ========== 搜索和查找 (Telescope) ==========
   -- 基础搜索
-  { "n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "查找文件", noremap = true, silent = true } },
+  { "n", "<leader><space>", "<cmd>Telescope find_files<cr>", { desc = "查找文件", noremap = true, silent = true } },
   { "n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { desc = "通过Grep查找", noremap = true, silent = true } },
   { "n", "<leader>fb", "<cmd>Telescope buffers<cr>", { desc = "查找缓冲区", noremap = true, silent = true } },
   { "n", "<leader>fh", "<cmd>Telescope help_tags<cr>", { desc = "查找帮助", noremap = true, silent = true } },
