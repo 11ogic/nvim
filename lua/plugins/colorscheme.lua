@@ -11,6 +11,22 @@ return {
         Normal = {
           bg = colors.palette.bg_main,
         },
+        -- 搜索颜色
+        Search = {
+          bg = "NONE",                -- 透明背景
+          fg = colors.palette.fg_bright, -- 白色文字
+          bold = true,
+        },
+        IncSearch = {
+          bg = "None",
+          fg = colors.palette.fg_bright,
+          bold = true,
+        },
+        CurSearch = {
+          bg = "None",
+          fg = colors.palette.fg_bright,
+          bold = true,
+        },
         -- 编辑器光标行
         CursorLine = {
           bg = colors.palette.bg_cursor,
@@ -25,31 +41,31 @@ return {
         },
         -- 普通行号
         LineNr = {
-          fg = colors.palette.fg_dim,      -- 使用次要文字颜色
-          bg = colors.palette.bg_main,     -- 与主背景一致
+          fg = colors.palette.fg_dim,  -- 使用次要文字颜色
+          bg = colors.palette.bg_main, -- 与主背景一致
         },
         -- 当前行行号（光标所在行）
         CursorLineNr = {
-          fg = colors.palette.fg_bright,   -- 使用高亮文字颜色
-          bg = colors.palette.bg_cursor,   -- 与光标行背景一致
-          bold = true,                     -- 加粗突出
+          fg = colors.palette.fg_bright, -- 使用高亮文字颜色
+          bg = colors.palette.bg_cursor, -- 与光标行背景一致
+          bold = true,                   -- 加粗突出
         },
         -- 标志列（行号左边的竖线区域）
         SignColumn = {
-          fg = colors.palette.fg_dark,     -- 标志前景色
-          bg = colors.palette.bg_main,     -- 与主背景一致
+          fg = colors.palette.fg_dark, -- 标志前景色
+          bg = colors.palette.bg_main, -- 与主背景一致
         },
         -- 窗口分界线
         WinSeparator = {
-          fg = colors.semantic.separator,  -- 使用统一的分隔符颜色
-          bg = "NONE",                     -- 透明背景
+          fg = colors.semantic.separator, -- 使用统一的分隔符颜色
+          bg = "NONE",                    -- 透明背景
         },
         -- 折叠列
         FoldColumn = {
           fg = colors.palette.fg_dim,
           bg = colors.palette.bg_main,
         },
-        
+
         -- ========== 诊断浮窗颜色覆盖 ==========
         -- 诊断浮窗背景
         NormalFloat = {

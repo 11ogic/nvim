@@ -54,9 +54,9 @@ return {
 
     -- 自定义格式化工具配置
     formatters = {
-      prettier = {
-        prepend_args = { "--single-quote", "--trailing-comma", "es5" },
-      },
+      -- prettier = {
+      --   prepend_args = { "--single-quote", "--trailing-comma", "es5" },
+      -- },
       stylua = {
         prepend_args = { "--indent-type", "Spaces", "--indent-width", "2" },
       },

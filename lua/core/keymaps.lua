@@ -313,3 +313,42 @@ end
 _G.setup_lsp_keymaps = setup_lsp_keymaps
 _G.setup_gitsigns_keymaps = setup_gitsigns_keymaps
 _G.setup_nvimtree_keymaps = setup_nvimtree_keymaps
+
+-- ========== 搜索后自动取消高亮 ==========
+local search_timer = nil -- 用于存储定时器
+local cancel_highlight = function()
+  -- 开启高亮
+  vim.opt.hlsearch = true
+  -- 如果已有定时器在运行，先取消它
+  if search_timer then
+    vim.fn.timer_stop(search_timer)
+  end
+
+  -- 创建新的定时器（1000ms 后清除高亮）
+  search_timer = vim.fn.timer_start(1000, function()
+    vim.cmd("nohlsearch")
+    search_timer = nil   -- 清空定时器引用
+  end)
+end
+
+vim.api.nvim_create_autocmd("CmdlineLeave", {
+  pattern = { "/", "?" },
+  callback = cancel_highlight,
+  desc = "搜索完成后自动取消高亮",
+})
+
+-- ========== 搜索跳转智能高亮 ==========
+local function search_and_highlight(direction)
+  return function()
+    -- 执行跳转
+    if direction == "next" then
+      vim.cmd("normal! n")
+    else
+      vim.cmd("normal! N")
+    end
+    cancel_highlight()
+  end
+end
+
+vim.keymap.set("n", "n", search_and_highlight("next"), { desc = "下一个搜索结果", noremap = true, silent = true })
+vim.keymap.set("n", "N", search_and_highlight("prev"), { desc = "上一个搜索结果", noremap = true, silent = true })
