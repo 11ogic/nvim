@@ -158,6 +158,17 @@ local M = {
   },
   { "n", "<leader>fl", "<cmd>EslintFixAll<cr>", { desc = "格式化 ESLint 代码", noremap = true, silent = true } },
 
+  -- ========== 代码片段管理 ==========
+  {
+    "n",
+    "<leader>se",
+    function()
+      local snippets_dir = vim.fn.stdpath("config") .. "/snippets"
+      vim.cmd("edit " .. snippets_dir)
+    end,
+    { desc = "编辑代码片段", noremap = true, silent = true }
+  },
+
   -- ========== Vue 开发 ==========
   {
     "n",
@@ -331,7 +342,7 @@ local cancel_highlight = function()
   -- 创建新的定时器（1000ms 后清除高亮）
   search_timer = vim.fn.timer_start(1000, function()
     vim.cmd("nohlsearch")
-    search_timer = nil   -- 清空定时器引用
+    search_timer = nil -- 清空定时器引用
   end)
 end
 

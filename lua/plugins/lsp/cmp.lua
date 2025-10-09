@@ -25,8 +25,11 @@ function M.setup()
       }),
     },
     mapping = cmp.mapping.preset.insert({
-      ["<C-e>"] = cmp.mapping.abort(),                   -- 关闭补全窗口
+      ["<C-q>"] = cmp.mapping.abort(),                   -- 关闭补全窗口
       ["<CR>"] = cmp.mapping.confirm({ select = true }), -- 确认选择
+      -- 滚动文档
+      ["<C-y>"] = cmp.mapping.scroll_docs(-4),
+      ["<C-e>"] = cmp.mapping.scroll_docs(4),
     }),
     sources = cmp.config.sources({
       { name = "nvim_lsp" },
