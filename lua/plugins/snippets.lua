@@ -35,15 +35,15 @@ return {
       })
 
       -- 片段展开后切换到普通模式
-      vim.api.nvim_create_autocmd("User", {
-        pattern = "LuasnipInsertNodeEnter",
-        callback = function()
-          vim.defer_fn(function()
-            vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", false)
-          end, 0)
-        end,
-        desc = "片段展开后切换到普通模式"
-      })
+      -- vim.api.nvim_create_autocmd("User", {
+      --   pattern = "LuasnipInsertNodeEnter",
+      --   callback = function()
+      --     vim.defer_fn(function()
+      --       vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>i", true, false, true), "n", false)
+      --     end, 0)
+      --   end,
+      --   desc = "片段展开后切换到普通模式"
+      -- })
 
       -- 加载 VSCode 风格的代码片段
       require("luasnip.loaders.from_vscode").lazy_load()
