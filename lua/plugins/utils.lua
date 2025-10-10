@@ -132,6 +132,34 @@ return {
     end,
   },
 
+  -- 自动闭合标签
+  {
+    "windwp/nvim-ts-autotag",
+    event = "InsertEnter",
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    config = function()
+      local file_types = { "html", "xml", "vue", "jsx", "tsx", "javascript", "typescript", "svelte", "php" }
+      local per_filetype = {}
+      for _, file_type in ipairs(file_types) do
+        per_filetype[file_type] = {
+          enable_close = true,
+        }
+      end
+      require("nvim-ts-autotag").setup({
+        opts = {
+          -- 启用闭合标签
+          enable_close = true,
+          -- 启用重命名标签
+          enable_rename = true,
+          -- 启用闭合斜杠
+          enable_close_on_slash = false,
+        },
+        -- 支持的文件类型
+        per_filetype = per_filetype,
+      })
+    end,
+  },
+
   -- 增强终端集成
   {
     "akinsho/toggleterm.nvim",
