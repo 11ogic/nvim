@@ -40,7 +40,7 @@ opt.scrolloff = 8
 opt.sidescrolloff = 8
 
 -- 更新时间
-opt.updatetime = 300
+opt.updatetime = 100
 opt.timeoutlen = 300
 
 -- 显示模式

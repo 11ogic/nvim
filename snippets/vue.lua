@@ -15,22 +15,17 @@ return {
 </script>
 
 <template>
-  <div class="{}">
+  <div>
     {}
   </div>
 </template>
 
-<style scoped lang="less">
-.{} {{
-  {}
-}}
+<style scoped lang="{}">
 </style>
   ]], {
     i(1, "// component"),
-    i(2, "component"),
-    i(3, "<!-- content -->"),
-    f(function(args) return args[1][1] end, { 2 }),
-    i(4, "/* styles */")
+    i(2, "<!-- content -->"),
+    i(3, "less"),
   })),
 
   -- Vue 3 组件
@@ -66,7 +61,7 @@ interface Emits {{
 
 const emit = defineEmits<Emits>()
   ]], {
-    i(1, "(e: \"update:title\")")
+    i(1, "(e: \"update:title\"): void")
   })),
 
   -- Vue 3 Computed

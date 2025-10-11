@@ -53,7 +53,7 @@ local M = {
   { "n", "gt", "<cmd>bnext<cr>", { desc = "下一个缓冲区", noremap = true, silent = true } },
   { "n", "gT", "<cmd>bprevious<cr>", { desc = "上一个缓冲区", noremap = true, silent = true } },
 
-  -- 真正的标签页操作（偶尔使用）
+  -- 标签页操作
   { "n", "<leader>tn", ":tabnew<CR>", { desc = "新建标签页", noremap = true, silent = true } },
   { "n", "<leader>tc", ":tabclose<CR>", { desc = "关闭标签页", noremap = true, silent = true } },
   { "n", "<leader>to", ":tabonly<CR>", { desc = "只保留当前标签页", noremap = true, silent = true } },
