@@ -367,3 +367,6 @@ end
 
 vim.keymap.set("n", "n", search_and_highlight("next"), { desc = "下一个搜索结果", noremap = true, silent = true })
 vim.keymap.set("n", "N", search_and_highlight("prev"), { desc = "上一个搜索结果", noremap = true, silent = true })
+
+-- ========== 娱乐功能 ==========
+vim.keymap.set("n", "<leader>fk", "<cmd>CellularAutomaton make_it_rain<CR>")
