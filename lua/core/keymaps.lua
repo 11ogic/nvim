@@ -57,8 +57,8 @@ local M = {
   { "n", "<leader>tn", ":tabnew<CR>", { desc = "新建标签页", noremap = true, silent = true } },
   { "n", "<leader>tc", ":tabclose<CR>", { desc = "关闭标签页", noremap = true, silent = true } },
   { "n", "<leader>to", ":tabonly<CR>", { desc = "只保留当前标签页", noremap = true, silent = true } },
-  { "n", "<leader>t[", ":tabp<CR>", { desc = "上一个标签页", noremap = true, silent = true } },
-  { "n", "<leader>t]", ":tabn<CR>", { desc = "下一个标签页", noremap = true, silent = true } },
+  { "n", "t[", ":tabp<CR>", { desc = "上一个标签页", noremap = true, silent = true } },
+  { "n", "t]", ":tabn<CR>", { desc = "下一个标签页", noremap = true, silent = true } },
 
   -- ========== 文件浏览器 (nvim-tree) ==========
   { "n", "<leader>o", ":NvimTreeToggle<CR>", { desc = "切换文件浏览器", noremap = true, silent = true } },
