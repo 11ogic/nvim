@@ -10,14 +10,16 @@ return {
         float = {
           enable = true,
           quit_on_focus_loss = true,
-          open_win_config = {
-            relative = "editor",
-            border = "rounded",
-            width = 100,
-            height = 50,
-            col = (vim.o.columns - 100) / 2, -- 水平居中
-            row = (vim.o.lines - 50) / 2,    -- 垂直居中
-          },
+          open_win_config = function()
+            return {
+              relative = "editor",
+              border = "rounded",
+              width = 100,
+              height = 50,
+              col = (vim.o.columns - 100) / 2, -- 水平居中
+              row = (vim.o.lines - 50) / 2,    -- 垂直居中
+            }
+          end,
         },
       },
       renderer = {
@@ -69,6 +71,25 @@ return {
           error = "✗",
         },
       },
+    })
+
+    -- 添加窗口尺寸变更时自动重新居中的功能
+    local function recenter_nvimtree()
+      local nvim_tree = require("nvim-tree.api")
+      if nvim_tree.tree.is_visible() then
+        -- 关闭并重新打开nvim-tree以重新居中
+        nvim_tree.tree.close()
+        vim.defer_fn(function()
+          nvim_tree.tree.open()
+        end, 10)
+      end
+    end
+
+    -- 监听VimResized事件
+    vim.api.nvim_create_autocmd("VimResized", {
+      pattern = "*",
+      callback = recenter_nvimtree,
+      desc = "重新居中nvim-tree当窗口尺寸变更时"
     })
   end,
   -- 根据 nvim-tree 官方文档设置诊断栏颜色
