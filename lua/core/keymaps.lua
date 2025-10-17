@@ -50,6 +50,12 @@ local M = {
   { "n", "<leader>qq", function()
     require('mini.bufremove').delete(0, true)
   end, { desc = "强制删除 buffer", noremap = true, silent = true } },
+  { "n", "<leader>qa", function()
+    vim.cmd('%bd|e#|bd#')
+  end, { desc = "关闭其他所有 buffer", noremap = true, silent = true } },
+  { "n", "<leader>qA", function()
+    vim.cmd('bufdo bd')
+  end, { desc = "关闭所有 buffer", noremap = true, silent = true } },
   { "n", "gt", "<cmd>bnext<cr>", { desc = "下一个缓冲区", noremap = true, silent = true } },
   { "n", "gT", "<cmd>bprevious<cr>", { desc = "上一个缓冲区", noremap = true, silent = true } },
 
