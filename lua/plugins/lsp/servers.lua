@@ -5,7 +5,11 @@ function M.setup()
   local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
   -- 设置按键映射函数 - 键映射已移至 lua/core/keymaps.lua 文件中统一管理
-  local on_attach = function(_, bufnr)
+  local on_attach = function(client, bufnr)
+    -- 禁用一些 LSP 的语义令牌，优先使用 Treesitter
+    if client.name == "ts_ls" or client.name == "vue_ls" then
+      client.server_capabilities.semanticTokensProvider = nil
+    end
     -- 调用统一的LSP键映射设置函数
     if _G.setup_lsp_keymaps then
       _G.setup_lsp_keymaps(bufnr)

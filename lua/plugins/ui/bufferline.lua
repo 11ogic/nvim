@@ -131,6 +131,21 @@ return {
           underline = true,
           sp = colors.palette.orange, -- 统一的橙色底线
         },
+        duplicate_selected = {
+          fg = colors.palette.fg_dim, -- 目录前缀使用较暗的颜色
+          bg = colors.bufferline.active_bg, -- 与活动标签背景一致
+          sp = colors.palette.orange,
+        },
+        duplicate_visible = {
+          fg = colors.palette.fg_dim,
+          bg = colors.palette.bg_light,
+          italic = true,
+        },
+        duplicate = {
+          fg = colors.palette.fg_dim,
+          bg = colors.bufferline.inactive_bg,
+          italic = true,
+        },
       },
     })
 
@@ -143,6 +158,10 @@ return {
         highlight! BufferLineModifiedSelected guifg=]] .. colors.semantic.warning .. [[ gui=underline
         highlight! BufferLineInfoSelected guifg=]] .. colors.semantic.info .. [[ gui=underline
         highlight! BufferLineHintSelected guifg=]] .. colors.semantic.hint .. [[ gui=underline
+        " 重复文件名前缀的背景色
+        highlight! BufferLineDuplicateSelected guifg=]] .. colors.palette.fg_dim .. [[ guibg=]] .. colors.bufferline.active_bg .. [[ gui=italic,underline
+        highlight! BufferLineDuplicateVisible guifg=]] .. colors.palette.fg_dim .. [[ guibg=]] .. colors.palette.bg_light .. [[ gui=italic
+        highlight! BufferLineDuplicate guifg=]] .. colors.palette.fg_dim .. [[ guibg=]] .. colors.bufferline.inactive_bg .. [[ gui=italic
       ]])
     end)
   end,
