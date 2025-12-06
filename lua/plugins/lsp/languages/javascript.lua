@@ -66,6 +66,26 @@ function M.setup(capabilities, on_attach)
       --   command = "EslintFixAll",
       -- })
     end,
+    -- 自定义 root_dir 函数，确保只在有配置文件的项目中启动
+    root_dir = function(fname)
+      local util = vim.fs
+      local root = util.root(fname, {
+        ".eslintrc",
+        ".eslintrc.js",
+        ".eslintrc.cjs",
+        ".eslintrc.json",
+        ".eslintrc.yaml",
+        ".eslintrc.yml",
+        "eslint.config.js",
+        "eslint.config.mjs",
+        "eslint.config.cjs",
+      })
+      -- 如果找不到 ESLint 配置文件，返回 nil 阻止 LSP 启动
+      if not root then
+        return nil
+      end
+      return root
+    end,
     settings = {
       workingDirectory = { mode = "auto" },
       format = { enable = true },
