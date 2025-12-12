@@ -148,7 +148,6 @@ local M = {
 
   -- ========== Git操作 ==========
   { "n", "<leader>gs", "<cmd>Git<cr>", { desc = "Git 状态", noremap = true, silent = true } },
-  { "n", "<leader>gb", "<cmd>Gblame<cr>", { desc = "Git blame", noremap = true, silent = true } },
   { "n", "<c-g>", "<cmd>nohlsearch<cr><cmd>LazyGit<cr>", { desc = "LazyGit", noremap = true, silent = true } },
 
   -- ========== Copilot ==========
@@ -175,16 +174,6 @@ local M = {
       vim.cmd("edit " .. snippets_dir)
     end,
     { desc = "编辑代码片段", noremap = true, silent = true }
-  },
-
-  -- ========== Vue 开发 ==========
-  {
-    "n",
-    "<leader>vf",
-    function()
-      vim.lsp.buf.format({ async = false })
-    end,
-    { desc = "格式化 Vue 文件", noremap = true, silent = true },
   },
 }
 

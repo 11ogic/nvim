@@ -146,61 +146,6 @@ export function use{}() {{
     f(function(args) return args[1][1] end, { 4 })
   })),
 
-  -- Vue 2 Options API 组件模板
-  s("vue2", fmt([[
-    <template>
-      <div class="{}">
-        {}
-      </div>
-    </template>
-
-    <script>
-    export default {{
-      name: '{}',
-      props: {{
-        {}
-      }},
-      data() {{
-        return {{
-          {}
-        }}
-      }},
-      computed: {{
-        {}() {{
-          {}
-        }}
-      }},
-      methods: {{
-        {}() {{
-          {}
-        }}
-      }},
-      mounted() {{
-        {}
-      }}
-    }}
-    </script>
-
-    <style scoped>
-    .{} {{
-      {}
-    }}
-    </style>
-  ]], {
-    i(1, "component-name"),
-    i(2, "<!-- template content -->"),
-    i(3, "ComponentName"),
-    i(4, "// props definition"),
-    i(5, "// data properties"),
-    i(6, "computedName"),
-    i(7, "// computed logic"),
-    i(8, "methodName"),
-    i(9, "// method logic"),
-    i(10, "// mounted logic"),
-    f(function(args) return args[1][1] end, { 1 }),
-    i(11, "/* styles */")
-  })),
-
   -- Pinia Store 模板（简化版）
   s("pinia", fmt([[
 import {{ defineStore }} from 'pinia'
@@ -240,4 +185,13 @@ export const use{}Store = defineStore('{}', () => {{
     i(2, "RouteName"),
     i(3, "ViewName")
   })),
+
+  s(
+    "t",
+    fmt('$t("{}")', {
+      f(function(_, snip)
+        return snip.env.SELECT_RAW or ""
+      end)
+    })
+  )
 }
