@@ -9,6 +9,8 @@ M.setup = function(capabilities, on_attach)
   vim.lsp.config("vue_ls", {
     capabilities = capabilities,
     on_attach = on_attach,
+    -- 优先匹配 tsconfig.json，解决 monorepo 子包切换问题
+    root_markers = { "tsconfig.json", "package.json" },
     init_options = {
       vue = {
         hybridMode = false,

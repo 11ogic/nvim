@@ -46,7 +46,8 @@ function M.setup(capabilities, on_attach)
       },
     },
     filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
-    root_markers = { "package.json", "tsconfig.json", "jsconfig.json" },
+    -- 优先匹配 tsconfig.json，解决 monorepo 子包切换问题
+    root_markers = { "tsconfig.json", "package.json", "jsconfig.json" },
     init_options = {
       plugins = {
         { name = "@vue/typescript-plugin", location = require("plugins.lsp.languages.vue").vue_language_server_path, languages = { "vue" } },
