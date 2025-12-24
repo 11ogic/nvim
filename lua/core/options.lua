@@ -59,3 +59,11 @@ opt.clipboard:append("unnamedplus")
 
 -- 不显示文件写入消息
 vim.opt.shortmess:append("W")
+
+-- 禁止 o/O 自动添加注释前缀
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "*",
+  callback = function()
+    vim.opt_local.formatoptions:remove("o")
+  end,
+})
