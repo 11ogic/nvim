@@ -120,13 +120,11 @@ return {
           -- 检查是否是无参数启动
           if vim.fn.argc() == 0 then
             vim.schedule(function()
-              -- 只加载当前目录的会话，不加载其他目录的
-              local cwd = vim.fn.getcwd()
-              local session_dir = vim.fn.expand(vim.fn.stdpath("state") .. "/sessions/")
-              -- persistence.nvim 用目录路径生成会话文件名（替换 / 为 %）
-              local session_file = session_dir .. cwd:gsub("/", "%%") .. ".vim"
+              -- 使用 persistence.nvim 内部方法获取当前目录的会话文件路径
+              local persistence = require("persistence")
+              local session_file = persistence.current()
               if vim.fn.filereadable(session_file) == 1 then
-                require("persistence").load()
+                persistence.load()
               end
             end)
           end
