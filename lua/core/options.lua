@@ -67,3 +67,6 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt_local.formatoptions:remove("o")
   end,
 })
+
+-- views can only be fully collapsed with the global statusline
+vim.opt.laststatus = 3
