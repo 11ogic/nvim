@@ -6,6 +6,8 @@ return {
     -- 设置nvim-tree
     require("nvim-tree").setup({
       sort_by = "case_sensitive",
+      sync_root_with_cwd = true,      -- 根目录与 cwd 同步
+      respect_buf_cwd = true,         -- 尊重缓冲区的 cwd
       view = {
         float = {
           enable = true,
@@ -51,7 +53,7 @@ return {
       -- 自动定位到当前文件
       update_focused_file = {
         enable = true,       -- 启用自动定位
-        update_root = false, -- 不自动切换根目录
+        update_root = true,  -- 自动切换到文件所在项目根目录
         ignore_list = {},    -- 忽略的文件类型
       },
       -- 诊断
