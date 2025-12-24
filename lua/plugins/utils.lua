@@ -113,15 +113,21 @@ return {
         options = { "buffers", "curdir", "tabpages", "winsize" },
       })
 
-      -- 仅在无参数启动 nvim 时自动恢复上次会话
+      -- 仅在无参数启动 nvim 且当前目录有会话时恢复
       vim.api.nvim_create_autocmd("VimEnter", {
         group = vim.api.nvim_create_augroup("RestoreSession", { clear = true }),
         callback = function()
           -- 检查是否是无参数启动
           if vim.fn.argc() == 0 then
-            -- 延迟执行，确保其他插件已加载
             vim.schedule(function()
-              require("persistence").load()
+              -- 只加载当前目录的会话，不加载其他目录的
+              local cwd = vim.fn.getcwd()
+              local session_dir = vim.fn.expand(vim.fn.stdpath("state") .. "/sessions/")
+              -- persistence.nvim 用目录路径生成会话文件名（替换 / 为 %）
+              local session_file = session_dir .. cwd:gsub("/", "%%") .. ".vim"
+              if vim.fn.filereadable(session_file) == 1 then
+                require("persistence").load()
+              end
             end)
           end
         end,
