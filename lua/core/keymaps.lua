@@ -352,11 +352,21 @@ vim.api.nvim_create_autocmd("CmdlineLeave", {
 -- ========== 搜索跳转智能高亮 ==========
 local function search_and_highlight(direction)
   return function()
-    -- 执行跳转
-    if direction == "next" then
-      vim.cmd("normal! n")
-    else
-      vim.cmd("normal! N")
+    -- 执行跳转，捕获可能的 E486 错误
+    local ok, err = pcall(function()
+      if direction == "next" then
+        vim.cmd("normal! n")
+      else
+        vim.cmd("normal! N")
+      end
+    end)
+    if not ok then
+      if err:match("E486") then
+        vim.notify("Pattern not found", vim.log.levels.WARN)
+      else
+        vim.notify(err, vim.log.levels.ERROR)
+      end
+      return
     end
     cancel_highlight()
   end
