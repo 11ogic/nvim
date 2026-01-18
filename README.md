@@ -33,7 +33,7 @@ mv ~/.local/share/nvim ~/.local/share/nvim.backup
 
 2. 克隆此仓库：
 ```bash
-git clone <你的仓库地址> ~/.config/nvim
+git clone https://github.com/bewater5/nvim.git ~/.config/nvim
 ```
 
 3. 启动 Neovim：
