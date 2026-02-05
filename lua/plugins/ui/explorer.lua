@@ -25,7 +25,7 @@ return {
         },
       },
       renderer = {
-        group_empty = true,
+        group_empty = false,
         highlight_git = true,
         highlight_opened_files = "name",
         indent_markers = {
